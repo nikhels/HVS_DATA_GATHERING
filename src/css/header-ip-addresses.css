@@ -1,0 +1,48 @@
+.header-sub.sub2 {
+  grid-area: header;
+  height:auto;
+  background-color: #2980b9;
+  padding-bottom:25px
+}
+.header-sub__collapsed.sub2 {
+  grid-area: header-sub2;
+  background-color: black;
+  }
+
+.header-sub2__input-container{
+  display:inline-grid;
+  grid-template-columns:repeat(4,185px) 120px;
+  column-gap: 10px;
+  text-align: center;
+  padding-top:20px;
+}
+
+.header-sub2__input-multiline{
+display: grid;
+grid-template-columns:170px;
+grid-template-rows: auto;
+row-gap: 10px;
+}
+.header-sub2__input-ip-address input{
+width:33px;
+height:23px;
+padding:0px;
+padding-left:2px;
+}
+
+.header-sub2__ip_container{
+  width:125px;
+  margin-top:5px;
+  height:32px;
+  background-color: white;
+  }
+
+.header-sub__input-field.dropdown.sub2 {
+width:190px;
+}
+
+.black-ip {
+  color:black;
+  font-size: 18px;
+}
+    

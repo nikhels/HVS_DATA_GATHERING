@@ -1,0 +1,6 @@
+.title-bar{
+  grid-area:title-bar; 
+  background-color: white;
+  padding-top:25px;
+
+}

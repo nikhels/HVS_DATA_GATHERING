@@ -1,0 +1,37 @@
+.header-sub {
+  height:100px;
+  display:grid;
+  grid-template-columns: repeat(6,auto);
+  padding-left:50px;
+  /* border-radius: 0px 0px 5px 5px;   */
+}
+
+.header-sub__title{
+    font-size: 24px;
+    padding-top:40px;
+    color:#f1c40f;
+    font-family:Karla;
+    }
+.header-sub__input-field-label{
+    font-size: 16px;
+    text-align: center;
+    margin-top:5px;
+    color:white;
+    font-family:Karla;
+    }
+
+  .header-sub__input-field{
+      width:115px;
+      height:25px;
+      margin-top:5px;
+      padding-left:10px;
+      font-weight: bold;
+      font-size:18px;
+      font-family: Rubik;
+
+    }
+.header-sub__input-field.dropdown{
+      height:32px; 
+    }
+
+  

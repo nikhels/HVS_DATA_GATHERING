@@ -1,0 +1,34 @@
+
+
+  .ip__card-header{
+    /* color:white; */
+    color:#f1c40f;
+    font-size: 20px;
+    text-align: center;
+    /* background-color: black; */
+    padding-top:2px;
+    padding-bottom:2px;
+
+  }
+  .ip__item-row{
+    display: grid;
+    grid-template-columns: auto;
+    column-gap: 2px;
+    height:50px;
+    font-weight: bold; 
+  }
+  .ip__item-label{
+    font-size: 14px;
+    font-family:Karla;
+    display:block;
+    color:#ecf0f1;
+    }
+
+    .ip__address-input-container{
+      display:inline-grid;
+      grid-template-columns:repeat(4,185px) 120px;
+      column-gap: 10px;
+      text-align: center;
+      padding-top:20px;
+    
+    }

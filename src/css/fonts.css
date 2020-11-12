@@ -1,0 +1,46 @@
+@font-face {
+  font-family:'Poppins';
+  src: url('../fonts/Poppins/Poppins-Regular.ttf') format('truetype');
+  font-weight:300;
+  font-style: normal;
+}
+@font-face {
+  font-family:'PTSerif';
+  src: url('../fonts/PT_Serif/PT_Serif-Web-Regular.ttf') format('truetype');
+  font-weight:300;
+  font-style: normal;
+}
+@font-face {
+  font-family:'Rubik';
+  src: url('../fonts/Rubik/Rubik-Regular.ttf') format('truetype');
+  font-weight:300;
+  font-style: normal;
+}
+@font-face {
+  font-family:'Karla';
+  src: url('../fonts/Karla/Karla-Bold.ttf') format('truetype');
+  font-weight:300;
+  font-style: normal;
+}
+@font-face {
+  font-family:'Lora';
+  src: url('../fonts/Lora/Lora-Italic-VariableFont_wght.ttf') format('truetype');
+  font-weight:300;
+  font-style: italic;
+}
+@font-face {
+  font-family:'Lora';
+  src: url('../fonts/Lora/Lora-VariableFont_wght.ttf') format('truetype');
+  font-weight:300;
+  font-style: normal;
+}
+@font-face {
+  font-family:'avenir';
+  src: url('../fonts/avenir/AvenirNextLTPro-Regular.otf') format('opentype');
+  font-style: normal;
+}
+@font-face {
+  font-family:'avenir-bold';
+  src: url('../fonts/avenir/AvenirNextLTPro-Bold.otf') format('opentype');
+  font-style: bold;
+}
