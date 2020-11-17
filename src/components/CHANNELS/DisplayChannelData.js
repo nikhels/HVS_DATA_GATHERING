@@ -143,7 +143,7 @@ export default function ChannelsDisplayList(channels) {
               id="channel-audio-1" 
               name="channel-audio-1"
               defaultValue = {audio1Pid}
-              onChange = {(e) => handleChanges({audio1:e.target.value})}
+              onChange = {(e) => handleChanges({audio1Pid:e.target.value})}
               /> 
         </td>
         <td className="display__edit-text-box large">
@@ -174,7 +174,7 @@ export default function ChannelsDisplayList(channels) {
             name="channel-audio-1"
              
             defaultValue = {audio2Pid}
-            onChange = {(e) => handleChanges({audio2:e.target.value})}
+            onChange = {(e) => handleChanges({audio2Pid:e.target.value})}
             />
         </td>
         <td className="display__edit-text-box large">

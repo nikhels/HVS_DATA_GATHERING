@@ -10,20 +10,21 @@ export default function HeaderEquipment() {
     setEquipmentTypeSelection,
     setEquipmentSelection,
     auxiliaryInformationDispatch,
-    // setExistingParameters,
-    // existingParameters,
     equipmentSelection,
     equipmentTypeSelection,
     navigationDispatch,
+    resetEquipmentSheet
   } = useContext(GlobalContext)
   
   
  const [newEquipmentToggle,setNewEquipmentToggle] = useState()
  const [existingEquipmentToggle,setExistingEquipmentToggle] = useState()
 
+
 function handleSetNewEquipmentToggle(){
   setNewEquipmentToggle(true)
   setExistingEquipmentToggle(false)
+  resetEquipmentSheet()
 }
 function handleSetExistingEquipmentToggle(){
   setNewEquipmentToggle(false)
@@ -42,6 +43,7 @@ function handleSetExistingEquipmentToggle(){
 
   function handleEquipmentApply(){
     navigationDispatch({type:NAVIGATION.CHANNELS})
+    window.location.reload()
   }
   
   // function handleExistingEquipmentSelection(e){

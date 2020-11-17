@@ -219,6 +219,17 @@ useEffect(()=>{
   localStorage.setItem(LOCAL_STORAGE_KEY_AUXILIARY, JSON.stringify(auxiliaryInformation))
 },[auxiliaryInformation])
 
+
+function resetEquipmentSheet(){
+  localStorage.setItem(LOCAL_STORAGE_KEY_CHANNELS, JSON.stringify([]))
+  localStorage.setItem(LOCAL_STORAGE_KEY_IPADDRESSES, JSON.stringify([]))
+  localStorage.setItem(LOCAL_STORAGE_KEY_EQUIPMENTTYPE, JSON.stringify([]))
+  localStorage.setItem(LOCAL_STORAGE_KEY_EQUIPMENT, JSON.stringify([]))
+  localStorage.setItem(LOCAL_STORAGE_KEY_AUXILIARY, JSON.stringify([]))
+
+}
+
+
 function updateChannels(channels,action){ 
   const {channelCount,virtual,physical} = auxiliaryInformation
   switch (action.type){
@@ -326,6 +337,7 @@ const globalContextValues = {
   getExisitingParameters,
   existingParameters,
   setExistingParameters,
+  resetEquipmentSheet,
   
   equipmentTypeSelection,
   equipmentSelection,
