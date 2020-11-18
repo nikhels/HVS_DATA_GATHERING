@@ -60,7 +60,9 @@ return (
       </div>
       </div>  
       <div className="display__text-area-container">
-            <textarea rows="4" cols="32" wrap="hard" placeholder = "Additional Notes" />
+            <textarea rows="4" cols="32" wrap="hard" />
+            {/* <textarea rows="4" cols="32" wrap="hard" placeholder = "Additional Notes" /> */}
+
       </div>
       
       </div>

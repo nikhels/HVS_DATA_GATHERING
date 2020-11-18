@@ -16,7 +16,7 @@ export default function DisplayHeader() {
     <>
     
     <div className="display__sheet-header-container">
-      <div className="display__sheet-header">{equipmentSelection} - Primary </div>
+      <div className="display__sheet-header">{equipmentSelection} </div>
       <div className="display__sheet-header">{callLetters} {equipmentTypeSelection} Parameters </div>
       <div className="display__sheet-branding">
         Heartland Video Systems <br />

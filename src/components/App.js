@@ -1,6 +1,6 @@
 import React, { useState, useReducer, useEffect,useRef  } from 'react';
 import '../css/App.css';
-import Display from './BODY/Banner'
+import Display from './BODY/Display'
 import HeaderEquipment from './NAVIGATION/HeaderEquipment'
 import HeaderChannels from './NAVIGATION/HeaderChannels'
 import HeaderIpAddresses from './NAVIGATION/HeaderIpAddresses'
