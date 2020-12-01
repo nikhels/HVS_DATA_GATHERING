@@ -30,8 +30,8 @@ export function IpAddressConstructor(x,ipAddressesCount){
   this.id = uuidv4()
   this.name = "IP 1"
   if (ipAddressesCount > 1){
-    if (x === 1) this.name = "IP 1 - ESXI"
-    if (x === 2) this.name = "IP 2 - NMX"
+    if (x === 1) this.name = "IP 1 - NMX"
+    if (x === 2) this.name = "IP 2 - ESXI"
     if (x === 3) this.name = "IP 3 - PSIP"
   }
   this.ip = ("192.168.1.1" + x)
