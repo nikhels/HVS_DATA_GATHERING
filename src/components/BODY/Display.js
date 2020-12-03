@@ -25,7 +25,8 @@ export default function Display() {
     navigation,
     navigationDispatch,
     channelEditCount,
-    ipAddressesEditCount
+    ipAddressesEditCount,
+    auxiliaryInformation
 
   } = useContext(GlobalContext)  
 
@@ -87,8 +88,10 @@ export default function Display() {
       <div className="left-content">
       {equipmentSelection && <div className="display__container"> <DisplayHeader />
        {/* <DisplayHeader /> */}
-      {ipAddresses.length > 0 &&<DisplayIpTables/>}
-      <DisplayPsip />          
+      {ipAddresses.length > 0 && <DisplayIpTables/>}
+
+      {/* {auxiliaryInformation.psip ="Internal Spooling" && <DisplayPsip />} */}
+
       {channels.length > 0  && <DisplayChannelTables /> }
     </div>}
     </div>

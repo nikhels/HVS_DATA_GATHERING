@@ -50,7 +50,7 @@ function App() {
     "dns2": "8.8.4.4",
     "ntp": "129.6.15.28",
     "ipAddressesCount": 3,
-    "psip": "Internal Spooling",
+    "psip": "",
     "psipPort":"N/A",
     "notes":"test",
   }
