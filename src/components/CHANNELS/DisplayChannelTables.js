@@ -34,11 +34,14 @@ const channelsList = channels.map(channel => {
         <th className="display__channel-header edit selected" id ="edit-column-header-selected" onClick={() => handleChannelEditToggle(false)}>
         <FiEdit /><div className="display__edit-all-text">ALL</div>
         </th>}
-        <th className="display__channel-header">DISPLAY NAME</th>
+        <th className="display__channel-header">INPUT TYPE</th>
+        <th className="display__channel-header">CHANNEL NAME & AFFILIATION</th>
         <th className="display__channel-header">VIRTUAL CHANNEL</th>
         <th className="display__channel-header">PHYSICAL CHANNEL</th>
-        <th className="display__channel-header">VIDEO FORMAT</th>
-        <th className="display__channel-header">ASPECT RATIO</th>
+        <th className="display__channel-header">INPUT VIDEO FORMAT</th>
+        <th className="display__channel-header">OUTPUT VIDEO FORMAT</th>
+        <th className="display__channel-header">AFD</th>
+        <th className="display__channel-header">OUTPUT ASPECT RATIO</th>
         <th className="display__channel-header">PMT <br />PID</th>
         <th className="display__channel-header">PCR/VIDEO PID</th>
         <th className="display__channel-header">AUDIO 1 PID</th>

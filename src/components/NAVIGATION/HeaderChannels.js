@@ -1,31 +1,31 @@
 import React, { useContext } from 'react'
 import { GlobalContext,ACTIONS } from '../App'
 import TextField from '@material-ui/core/TextField'
-import InputDropdown from '../INPUT/InputDropdown';
+// import InputDropdown from '../INPUT/InputDropdown';
 // import { ACTIONS } from './App'
 import { FaCheck} from 'react-icons/fa'
 export default function HeaderChannels() {
   const {
     // channelDispatch,
     auxiliaryInformationDispatch,
-    auxiliaryInformation,
+    // auxiliaryInformation,
     loadOrCreateChannels
     
   } = useContext(GlobalContext)
   
-  const unitCountData = {
-    label:"Units",
-    className:"input__dropdown small",
-    functionCall: handleUnitCountSelection,
-    displayValue:auxiliaryInformation.units,
-    disabled:true,
-    selection1: 1,
-    selection2: 2,
-  }
+  // const unitCountData = {
+  //   label:"Units",
+  //   className:"input__dropdown small",
+  //   functionCall: handleUnitCountSelection,
+  //   displayValue:auxiliaryInformation.units,
+  //   disabled:true,
+  //   selection1: 1,
+  //   selection2: 2,
+  // }
   
-  function handleUnitCountSelection(e){
-    auxiliaryInformationDispatch({type:ACTIONS.CHANGE, payload:{units:(e.target.value)}})
-  }
+  // function handleUnitCountSelection(e){
+  //   auxiliaryInformationDispatch({type:ACTIONS.CHANGE, payload:{units:(e.target.value)}})
+  // }
   
 
   return (
@@ -34,6 +34,7 @@ export default function HeaderChannels() {
     <div className="header">
       <div className="header__input-container six-column"> 
       <div className=""> 
+
         <TextField id="filled-basic" 
               label="Channel Count" 
               variant="filled" 
@@ -43,7 +44,7 @@ export default function HeaderChannels() {
               color="secondary"
               onChange = {(e) => auxiliaryInformationDispatch({type:ACTIONS.CHANGE, payload:{channelCount:parseInt(e.target.value)}})} />
         </div>
-        <InputDropdown data = {unitCountData}/>
+        {/* <InputDropdown data = {unitCountData}/> */}
         <div className=""> 
         <TextField id="filled-basic" 
               label="Virtual Channel" 

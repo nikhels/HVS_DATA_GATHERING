@@ -9,7 +9,6 @@ export default function HeaderIpAddresses() {
   const {    
     auxiliaryInformationDispatch,
     auxiliaryInformation,
-    ipAddressesDispatch,
     loadOrCreateIpAddresses,
     equipmentSelection
   } = useContext(GlobalContext)
@@ -43,7 +42,7 @@ export default function HeaderIpAddresses() {
     <div className="header">
     <div className="header__input-container six-column"> 
       <InputDropdown data = {psipSourceData}/> 
-          {auxiliaryInformation.psip === "Internal Spooling" &&
+          {/* {auxiliaryInformation.psip === "Internal Spooling" &&
             <div> 
             <TextField id="filled-basic" 
               label="PSIP Port" 
@@ -55,7 +54,7 @@ export default function HeaderIpAddresses() {
               color="secondary"
               onChange = {(e) => ipAddressesDispatch({type:ACTIONS.CHANGE,payload:{psipPort:parseInt(e.target.value)}})} /> 
             </div>
-          }
+          } */}
           <div> 
             <TextField id="filled-basic" 
               label="DNS Server 1" 

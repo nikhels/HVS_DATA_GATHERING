@@ -15,7 +15,7 @@ export default function IpDisplayList(ipAddress) {
   
   const {
     ipAddressesDispatch,
-    auxiliaryInformation,
+    // auxiliaryInformation,
     setIpAddressesEditCount,
     ipAddressesEditCount,
     ipAddresses,
@@ -43,10 +43,7 @@ export default function IpDisplayList(ipAddress) {
       <td className="display__text-box large">{ip}</td>
       <td className="display__text-box large">{subnet}</td>  
       <td className="display__text-box large">{gateway}</td>    
-      { name === "IP 3 - PSIP" &&
-      <td className="display__text-box small">{auxiliaryInformation.psipPort}</td>}  
-      { name !== "IP 3 - PSIP" &&
-      <td className="display__text-box small">N/A</td>}  
+
     </tr>
     </tbody>}
     
@@ -79,11 +76,11 @@ export default function IpDisplayList(ipAddress) {
         onChange={(e) => handleChanges({gateway:e.target.value})}
            /> 
       </td>    
-      { name === "IP 3 - PSIP" &&
+      {/* { name === "IP 3 - PSIP" &&
       <td className="display__text-box small">{auxiliaryInformation.psipPort}</td>}  
       { name !== "IP 3 - PSIP" &&
       <td className="display__text-box small">N/A</td>}  
-      
+       */}
     </tr>
     </tbody>}
     </>

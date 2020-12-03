@@ -42,8 +42,8 @@ function handleSetExistingEquipmentToggle(){
   }
 
   function handleEquipmentApply(){
+    // window.location.reload()
     navigationDispatch({type:NAVIGATION.CHANNELS})
-    window.location.reload()
   }
   
   // function handleExistingEquipmentSelection(e){

@@ -40,19 +40,7 @@ const LOCAL_STORAGE_KEY_AUXILIARY= 'HVSParameterGathering.auxiliary'
 
 export const GlobalContext = React.createContext()
 
-// export const GlobalProvider = (props) => {
-//   const [state, dispatch] = useReducer(AppReducer, initialState);
-// }
-// useEffect(() => {const initialState = 
-//   localStorage.getItem(LOCAL_STORAGE_KEY_CHANNELS) 
-//   ? JSON.parse(localStorage.getItem(LOCAL_STORAGE_KEY_CHANNELS)) 
-//   : []
-// }, []) 
-
-function App() {
-  
-
-  
+function App() { 
   const auxiliaryDefaults = {
     "tsid":"",
     "channelCount":0,
@@ -64,6 +52,7 @@ function App() {
     "ipAddressesCount": 3,
     "psip": "Internal Spooling",
     "psipPort":"N/A",
+    "notes":"test",
   }
   
   const initialChannelsState =
@@ -87,11 +76,7 @@ function App() {
   ? JSON.parse(localStorage.getItem(LOCAL_STORAGE_KEY_AUXILIARY)) 
   : auxiliaryDefaults
 
-
-
-// const [psipSource, setPsipSource] = useState()
 const [auxiliaryInformation, auxiliaryInformationDispatch] = useReducer(updateAuxiliaryInformation,initialAuxiliaryInformationState)
-// const [ipAuxiliary,ipAuxiliaryDispatch] = useReducer(updateIpAuxiliary,ipAuxiliaryDefaults)
 
 const [navigation,navigationDispatch] = useReducer(toggleNavigation,{equipment:true,channels:false,ipAddresses:false,submit:false})
 const [channels,channelDispatch] = useReducer(updateChannels, initialChannelsState)
@@ -110,7 +95,7 @@ const [ipAddressesEditCount,setIpAddressesEditCount] = useState(0)
 const [existingParameters,setExistingParameters] = useState()
 
 
-
+// console.log(auxiliaryInformation)
 
 function submitParameters(){
   Axios.post("http://localhost:3001/create",{
@@ -263,7 +248,6 @@ function updateChannels(channels,action){
 function updateAuxiliaryInformation(auxiliaryInformation,action){
   switch (action.type){
     case ACTIONS.CHANGE:
-
       if (action.payload !== ""){
           const updatedAuxiliaryInformation = {...auxiliaryInformation, ...action.payload}
           return auxiliaryInformation = updatedAuxiliaryInformation

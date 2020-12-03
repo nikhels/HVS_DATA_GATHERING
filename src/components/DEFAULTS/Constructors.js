@@ -4,6 +4,7 @@ export function ChannelConstructor(x,virtual,physical){
   
   
   this.id = parseFloat("1." + x)
+  this.inputType = "SDI"
   this.name = 'Channel ' + x
   this.virtual = parseFloat(virtual + "." + x) || 10
   this.physical= parseFloat(physical + "." + (x + 2)) || 10
@@ -12,15 +13,18 @@ export function ChannelConstructor(x,virtual,physical){
   this.audio1Pid = ((x + 2) * 10) + 4
   this.aspectRatio = "16x9"
   this.selected = false
+  this.afd = "No"
   if(x===1) {
-    this.videoType = "1080i" 
+    this.videoTypeIn = "1080i"
+    this.videoTypeOut = "1080i"
     this.audio1Bitrate = "384kbs"
-    this.audio1Type = "5.1 Surround"
+    this.audio1Type = "PCM 5.1"
   }
   if(x!==1) {
-    this.videoType = "480i"
+    this.videoTypeIn = "480i"
+    this.videoTypeOut = "480i"
     this.audio1Bitrate = "192kbs"
-    this.audio1Type = "2.0 Stereo"
+    this.audio1Type = "PCM 2.0"
     
   }   
 }

@@ -4,6 +4,7 @@ import { GlobalContext, NAVIGATION} from '../App'
 import DisplayChannelTables from '../CHANNELS/DisplayChannelTables'
 import DisplayIpTables from '../IP_ADDRESSES/DisplayIpTables'
 import DisplayHeader from './DisplayHeader'
+import DisplayPsip from '../IP_ADDRESSES/DisplayPsip'
 import { FiEdit } from 'react-icons/fi'
 import { FaChevronCircleRight} from 'react-icons/fa'
 // import { RiShareForwardFill } from 'react-icons/ri'
@@ -87,7 +88,7 @@ export default function Display() {
       {equipmentSelection && <div className="display__container"> <DisplayHeader />
        {/* <DisplayHeader /> */}
       {ipAddresses.length > 0 &&<DisplayIpTables/>}
-     {/* <DisplayIpTables/> */}
+      <DisplayPsip />          
       {channels.length > 0  && <DisplayChannelTables /> }
     </div>}
     </div>
