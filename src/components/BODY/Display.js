@@ -4,7 +4,7 @@ import { GlobalContext, NAVIGATION} from '../App'
 import DisplayChannelTables from '../CHANNELS/DisplayChannelTables'
 import DisplayIpTables from '../IP_ADDRESSES/DisplayIpTables'
 import DisplayHeader from './DisplayHeader'
-import DisplayPsip from '../IP_ADDRESSES/DisplayPsip'
+// import DisplayPsip from '../IP_ADDRESSES/DisplayPsip'
 import { FiEdit } from 'react-icons/fi'
 import { FaChevronCircleRight} from 'react-icons/fa'
 // import { RiShareForwardFill } from 'react-icons/ri'
@@ -26,7 +26,7 @@ export default function Display() {
     navigationDispatch,
     channelEditCount,
     ipAddressesEditCount,
-    auxiliaryInformation
+    // auxiliaryInformation
 
   } = useContext(GlobalContext)  
 
