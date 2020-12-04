@@ -10,7 +10,8 @@ export default function HeaderIpAddresses() {
     auxiliaryInformationDispatch,
     auxiliaryInformation,
     loadOrCreateIpAddresses,
-    equipmentSelection
+    // equipmentSelection,
+    handlePsipSourceSelection
   } = useContext(GlobalContext)
 
   const psipSourceData = {
@@ -22,20 +23,8 @@ export default function HeaderIpAddresses() {
     selection2: "Downstream",
   }
   
-  function handlePsipSourceSelection(e){
-    if (equipmentSelection === "Harmonic X2S") {
-      if (e === "Downstream"){
-        auxiliaryInformationDispatch({type:ACTIONS.CHANGE, payload:{psip:e,ipAddressesCount:2}}) 
-      }
-      if (e === "Internal Spooling"){
-        auxiliaryInformationDispatch({type:ACTIONS.CHANGE, payload:{psip:e,ipAddressesCount:3}}) 
-      }
-    }
-   else {
-    auxiliaryInformationDispatch({type:ACTIONS.CHANGE, payload:{psip:e,ipAddressesCount:1}}) 
-   }
-  }
-   
+ 
+ 
   return (
     <>
     

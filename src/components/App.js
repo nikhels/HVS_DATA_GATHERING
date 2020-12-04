@@ -51,8 +51,8 @@ function App() {
     "ntp": "129.6.15.28",
     "ipAddressesCount": 3,
     "psip": "",
-    "psipPort":"N/A",
-    "notes":"test",
+    "psipPort":"",
+    "notes":"",
   }
   
   const initialChannelsState =
@@ -93,6 +93,7 @@ const [ipAddressEditToggle,setIpAddressEditToggle] = useState()
 const [ipAddressesEditCount,setIpAddressesEditCount] = useState(0)
 
 const [existingParameters,setExistingParameters] = useState()
+const [psipToggle,setPsipToggle]= useState()
 
 
 // console.log(auxiliaryInformation)
@@ -187,6 +188,22 @@ function loadOrCreateIpAddresses(){
   if (ipAddresses.length === 0 ){
     ipAddressesDispatch({type:ACTIONS.DEFAULT})
   }
+}
+
+function handlePsipSourceSelection(e){
+  if (equipmentSelection === "Harmonic X2S") {
+    if (e === "Downstream"){
+      auxiliaryInformationDispatch({type:ACTIONS.CHANGE, payload:{psip:e,ipAddressesCount:2}})
+      setPsipToggle(false)
+    }
+    if (e === "Internal Spooling"){
+      auxiliaryInformationDispatch({type:ACTIONS.CHANGE, payload:{psip:e,ipAddressesCount:3}}) 
+      setPsipToggle(true)
+    }
+  }
+ else {
+  auxiliaryInformationDispatch({type:ACTIONS.CHANGE, payload:{psip:e,ipAddressesCount:1}}) 
+ }
 }
 useEffect(()=>{
   localStorage.setItem(LOCAL_STORAGE_KEY_CHANNELS, JSON.stringify(channels))
@@ -309,6 +326,7 @@ const globalContextValues = {
   setIpAddressesEditCount,
   setChannelEditToggle,
   setIpAddressEditToggle,
+  psipToggle,
   
   loadOrCreateChannels,
   loadOrCreateIpAddresses,
@@ -316,6 +334,7 @@ const globalContextValues = {
   handleChannelEditToggle,
   handleIpAddressesEditToggle,
   handlePrint,
+  handlePsipSourceSelection,
 
   submitParameters,
   getExisitingParameters,

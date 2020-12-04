@@ -29,7 +29,7 @@ return (
         <tr>
           {!ipAddressEditToggle &&
           <th className="display__channel-header edit" id ="edit-column-header" onClick={() => handleIpAddressesEditToggle(true) }>
-          <FiEdit /><div className="display__edit-all-text">ALL</div></th>}
+          <div className="display__edit-all-text"> EDIT ALL</div></th>}
           {ipAddressEditToggle &&
           <th className="display__channel-header edit selected" id ="edit-column-header-selected" onClick={() => handleIpAddressesEditToggle(false)}>
           <FiEdit /><div className="display__edit-all-text">ALL</div></th>}
@@ -66,6 +66,7 @@ return (
             <textarea rows="4" cols="32" wrap="hard" 
             onChange = {(e) => auxiliaryInformationDispatch({type:ACTIONS.CHANGE, payload:{notes:e.target.value}})}
             value={notes}
+            placeholder = "Additional Notes"
 
             />
             

@@ -70,7 +70,8 @@ html {
 
 .left-content{
   grid-area:left-content;
-  height:100vh;
+  height:100%;
+  padding-bottom:20px;
   margin-left:50px;
   margin-right:50px;
   /* margin-top: auto; */

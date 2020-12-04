@@ -28,7 +28,7 @@ const channelsList = channels.map(channel => {
       <tr> 
     {!channelEditToggle &&
         <th className="display__channel-header edit" id ="edit-column-header" onClick={() => handleChannelEditToggle(true) }>
-        <FiEdit /><div className="display__edit-all-text">ALL</div>
+        <div className="display__edit-all-text">EDIT ALL</div>
         </th>}
     {channelEditToggle &&
         <th className="display__channel-header edit selected" id ="edit-column-header-selected" onClick={() => handleChannelEditToggle(false)}>
