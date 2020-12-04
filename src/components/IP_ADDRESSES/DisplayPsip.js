@@ -1,13 +1,11 @@
-import React, { useState } from "react";
-// import { GlobalContext } from "../App";
+import React, { useState, useContext } from "react";
+import { GlobalContext, ACTIONS } from "../App";
 import { FiEdit } from "react-icons/fi";
 import { FaCheckCircle } from "react-icons/fa";
 import { HiPlus } from "react-icons/hi";
 
 export default function DisplayPsip() {
-  // const { handleIpAddressesEditToggle, ipAddressEditToggle } = useContext(
-  //   GlobalContext
-  // );
+  const { auxiliaryInformationDispatch } = useContext(GlobalContext);
 
   const initialPsipData = {
     psip1Name: "Guidebuilder-1",
@@ -16,11 +14,12 @@ export default function DisplayPsip() {
     psip1Gateway: "192.168.1.1",
     psip1Port: "3000",
     psip1Selected: false,
+    secondaryPsip: false,
     psip2Name: "Guidebuilder-2",
-    psip2Ip: "192.168.1.200",
-    psip2Subnet: "255.255.255.0",
-    psip2Gateway: "192.168.1.1",
-    psip2Port: "3001",
+    psip2Ip: "",
+    psip2Subnet: "",
+    psip2Gateway: "",
+    psip2Port: "",
     psip2Selected: false,
   };
 
@@ -29,8 +28,11 @@ export default function DisplayPsip() {
   function handleChanges(e) {
     const psipChanges = { ...psipData, ...e };
     setPsipData(psipChanges);
+    auxiliaryInformationDispatch({
+      type: ACTIONS.CHANGE,
+      payload: { psipInformation: psipData },
+    });
   }
-  console.log(psipData);
 
   const {
     psip1Name,
@@ -39,6 +41,13 @@ export default function DisplayPsip() {
     psip1Gateway,
     psip1Port,
     psip1Selected,
+    secondaryPsip,
+    psip2Name,
+    psip2Ip,
+    psip2Subnet,
+    psip2Gateway,
+    psip2Port,
+    psip2Selected,
     psipProvider,
     psipUsername,
     psipPassword,
@@ -54,6 +63,7 @@ export default function DisplayPsip() {
                 <th
                   className="display__channel-header edit"
                   id="edit-column-header"
+                  onClick={() => handleChanges({ secondaryPsip: true })}
                 >
                   <HiPlus />
                   <div className="display__edit-all-text">ADD</div>
@@ -76,7 +86,6 @@ export default function DisplayPsip() {
                     onClick={() => handleChanges({ psip1Selected: true })}
                     id="edit-column"
                   >
-                    {" "}
                     <FiEdit />
                   </td>
                   <td className="display__text-box large">{psip1Name}</td>
@@ -185,6 +194,88 @@ export default function DisplayPsip() {
                 </tr>
               </tbody>
             )}
+            {/* SECONDART PSIP UNIT */}
+            {secondaryPsip && !psip2Selected && (
+              <tbody className="display__channel-data">
+                <tr>
+                  <td
+                    onClick={() => handleChanges({ psip2Selected: true })}
+                    id="edit-column"
+                  >
+                    <FiEdit />
+                  </td>
+                  <td className="display__text-box large">{psip2Name}</td>
+                  <td className="display__text-box large">{psip2Ip}</td>
+                  <td className="display__text-box large">{psip2Subnet}</td>
+                  <td className="display__text-box large">{psip2Gateway}</td>
+                  <td className="display__text-box large">{psip2Port}</td>
+                </tr>
+              </tbody>
+            )}
+            {secondaryPsip && psip2Selected && (
+              <tbody className="display__channel-data selected">
+                <tr>
+                  <td
+                    onClick={() => handleChanges({ psip2Selected: false })}
+                    className="channel__edit-field"
+                    id="edit-column-selected"
+                  >
+                    {" "}
+                    <FaCheckCircle />
+                  </td>
+                  <td className="display__edit-text-box large">
+                    <input
+                      type="text"
+                      id="ip-address"
+                      placeholder={psip2Name}
+                      onChange={(e) =>
+                        handleChanges({ psip2Name: e.target.value })
+                      }
+                    />
+                  </td>
+                  <td className="display__edit-text-box large">
+                    <input
+                      type="text"
+                      id="ip-address"
+                      placeholder={psip2Ip}
+                      onChange={(e) =>
+                        handleChanges({ psip2Ip: e.target.value })
+                      }
+                    />
+                  </td>
+                  <td className="display__edit-text-box large">
+                    <input
+                      type="text"
+                      id="subnet"
+                      placeholder={psip2Subnet}
+                      onChange={(e) =>
+                        handleChanges({ psip2Subnet: e.target.value })
+                      }
+                    />
+                  </td>
+                  <td className="display__edit-text-box large">
+                    <input
+                      type="text"
+                      id="subnet"
+                      placeholder={psip2Gateway}
+                      onChange={(e) =>
+                        handleChanges({ psip2Gateway: e.target.value })
+                      }
+                    />
+                  </td>
+                  <td className="display__edit-text-box large">
+                    <input
+                      type="text"
+                      id="subnet"
+                      placeholder={psip2Port}
+                      onChange={(e) =>
+                        handleChanges({ psip2Port: e.target.value })
+                      }
+                    />
+                  </td>   
+                     </tr> 
+                      </tbody>
+                      )}
           </table>
         </div>
       </div>

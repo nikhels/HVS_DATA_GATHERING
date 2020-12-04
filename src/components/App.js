@@ -231,7 +231,7 @@ function resetEquipmentSheet(){
 
 }
 
-
+console.log(auxiliaryInformation)
 function updateChannels(channels,action){ 
   const {channelCount,virtual,physical} = auxiliaryInformation
   switch (action.type){

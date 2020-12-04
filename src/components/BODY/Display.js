@@ -26,13 +26,12 @@ export default function Display() {
     navigationDispatch,
     channelEditCount,
     ipAddressesEditCount,
-    auxiliaryInformation,
     psipToggle
 
   } = useContext(GlobalContext)  
   // console.log(auxiliaryInformation)   
-  const psip = auxiliaryInformation.psip
-  console.log(psip)
+  
+
   
   return (
     
