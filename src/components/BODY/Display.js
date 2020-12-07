@@ -26,7 +26,7 @@ export default function Display() {
     navigationDispatch,
     channelEditCount,
     ipAddressesEditCount,
-    psipToggle
+    auxiliaryInformation
 
   } = useContext(GlobalContext)  
   // console.log(auxiliaryInformation)   
@@ -93,7 +93,7 @@ export default function Display() {
        {/* <DisplayHeader /> */}
       {ipAddresses.length > 0 && <DisplayIpTables/>}
 
-      {psipToggle && <DisplayPsip />}
+      {auxiliaryInformation.psipToggle && <DisplayPsip />}
        {/* <DisplayPsip /> */}
            
       {channels.length > 0  && <DisplayChannelTables /> }

@@ -41,6 +41,22 @@ const LOCAL_STORAGE_KEY_AUXILIARY= 'HVSParameterGathering.auxiliary'
 export const GlobalContext = React.createContext()
 
 function App() { 
+  const psipDefaults = {
+    psip1Name: "Guidebuilder-1",
+    psip1Ip: "192.168.1.200",
+    psip1Subnet: "255.255.255.0",
+    psip1Gateway: "192.168.1.1",
+    psip1Port: "3000",
+    psip1Selected: false,
+    secondaryPsip: false,
+    psip2Name: "Guidebuilder-2",
+    psip2Ip: "",
+    psip2Subnet: "",
+    psip2Gateway: "",
+    psip2Port: "",
+    psip2Selected: false,
+  };
+  
   const auxiliaryDefaults = {
     "tsid":"",
     "channelCount":0,
@@ -53,7 +69,10 @@ function App() {
     "psip": "",
     "psipPort":"",
     "notes":"",
+    "psipToggle":false,
+    "psipInformation":psipDefaults
   }
+  
   
   const initialChannelsState =
   localStorage.getItem(LOCAL_STORAGE_KEY_CHANNELS) 
@@ -93,7 +112,7 @@ const [ipAddressEditToggle,setIpAddressEditToggle] = useState()
 const [ipAddressesEditCount,setIpAddressesEditCount] = useState(0)
 
 const [existingParameters,setExistingParameters] = useState()
-const [psipToggle,setPsipToggle]= useState()
+// const [psipToggle,setPsipToggle]= useState()
 
 
 // console.log(auxiliaryInformation)
@@ -193,12 +212,12 @@ function loadOrCreateIpAddresses(){
 function handlePsipSourceSelection(e){
   if (equipmentSelection === "Harmonic X2S") {
     if (e === "Downstream"){
-      auxiliaryInformationDispatch({type:ACTIONS.CHANGE, payload:{psip:e,ipAddressesCount:2}})
-      setPsipToggle(false)
+      auxiliaryInformationDispatch({type:ACTIONS.CHANGE, payload:{psip:e,ipAddressesCount:2,psipToggle:false}})
+      // setPsipToggle(false)
     }
     if (e === "Internal Spooling"){
-      auxiliaryInformationDispatch({type:ACTIONS.CHANGE, payload:{psip:e,ipAddressesCount:3}}) 
-      setPsipToggle(true)
+      auxiliaryInformationDispatch({type:ACTIONS.CHANGE, payload:{psip:e,ipAddressesCount:3,psipToggle:true}}) 
+      // setPsipToggle(true)
     }
   }
  else {
@@ -231,7 +250,7 @@ function resetEquipmentSheet(){
 
 }
 
-console.log(auxiliaryInformation)
+// console.log(auxiliaryInformation)
 function updateChannels(channels,action){ 
   const {channelCount,virtual,physical} = auxiliaryInformation
   switch (action.type){
@@ -326,7 +345,6 @@ const globalContextValues = {
   setIpAddressesEditCount,
   setChannelEditToggle,
   setIpAddressEditToggle,
-  psipToggle,
   
   loadOrCreateChannels,
   loadOrCreateIpAddresses,

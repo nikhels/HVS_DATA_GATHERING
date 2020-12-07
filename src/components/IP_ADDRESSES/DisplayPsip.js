@@ -1,36 +1,24 @@
-import React, { useState, useContext } from "react";
+import React, { useContext } from "react";
 import { GlobalContext, ACTIONS } from "../App";
 import { FiEdit } from "react-icons/fi";
 import { FaCheckCircle } from "react-icons/fa";
 import { HiPlus } from "react-icons/hi";
 
 export default function DisplayPsip() {
-  const { auxiliaryInformationDispatch } = useContext(GlobalContext);
+  const { 
+    auxiliaryInformationDispatch,
+    auxiliaryInformation 
+  } = useContext(GlobalContext);
 
-  const initialPsipData = {
-    psip1Name: "Guidebuilder-1",
-    psip1Ip: "192.168.1.200",
-    psip1Subnet: "255.255.255.0",
-    psip1Gateway: "192.168.1.1",
-    psip1Port: "3000",
-    psip1Selected: false,
-    secondaryPsip: false,
-    psip2Name: "Guidebuilder-2",
-    psip2Ip: "",
-    psip2Subnet: "",
-    psip2Gateway: "",
-    psip2Port: "",
-    psip2Selected: false,
-  };
 
-  const [psipData, setPsipData] = useState(initialPsipData);
+
+  // const [psipData, setPsipData] = useState(initialPsipData);
 
   function handleChanges(e) {
-    const psipChanges = { ...psipData, ...e };
-    setPsipData(psipChanges);
+    const psipChanges = { ...auxiliaryInformation.psipInformation, ...e };
     auxiliaryInformationDispatch({
       type: ACTIONS.CHANGE,
-      payload: { psipInformation: psipData },
+      payload: { psipInformation: psipChanges},
     });
   }
 
@@ -41,7 +29,7 @@ export default function DisplayPsip() {
     psip1Gateway,
     psip1Port,
     psip1Selected,
-    secondaryPsip,
+    secondaryPsipToggle,
     psip2Name,
     psip2Ip,
     psip2Subnet,
@@ -51,7 +39,9 @@ export default function DisplayPsip() {
     psipProvider,
     psipUsername,
     psipPassword,
-  } = psipData;
+  } = auxiliaryInformation.psipInformation
+
+  console.log(auxiliaryInformation.psipInformation)
 
   return (
     <>
@@ -63,7 +53,7 @@ export default function DisplayPsip() {
                 <th
                   className="display__channel-header edit"
                   id="edit-column-header"
-                  onClick={() => handleChanges({ secondaryPsip: true })}
+                  onClick={() => handleChanges({ secondaryPsipToggle: true })}
                 >
                   <HiPlus />
                   <div className="display__edit-all-text">ADD</div>
@@ -195,7 +185,7 @@ export default function DisplayPsip() {
               </tbody>
             )}
             {/* SECONDART PSIP UNIT */}
-            {secondaryPsip && !psip2Selected && (
+            {secondaryPsipToggle && !psip2Selected && (
               <tbody className="display__channel-data">
                 <tr>
                   <td
@@ -212,7 +202,7 @@ export default function DisplayPsip() {
                 </tr>
               </tbody>
             )}
-            {secondaryPsip && psip2Selected && (
+            {secondaryPsipToggle && psip2Selected && (
               <tbody className="display__channel-data selected">
                 <tr>
                   <td
