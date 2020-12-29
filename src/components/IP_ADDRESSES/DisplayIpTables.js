@@ -13,7 +13,7 @@ export default function IpDisplay() {
   } = useContext(GlobalContext)
   
   const {dns1,dns2,ntp,notes} = auxiliaryInformation
-  // console.log(notes)
+
  
   const ipData = ipAddresses.map(ipAddress => {
     return <DisplayIpData key = {ipAddress.id} {...ipAddress} />

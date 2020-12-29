@@ -58,6 +58,9 @@ export default function InputDropdown({data}) {
     selection2,
     selection3,
     selection4,
+    selection5,
+    selection6,
+    
     disabled = false
   } = data
 
@@ -81,6 +84,8 @@ export default function InputDropdown({data}) {
       <MenuItem value={selection2}>{selection2}</MenuItem>
       <MenuItem value={selection3}>{selection3}</MenuItem>
       <MenuItem value={selection4}>{selection4}</MenuItem>
+      <MenuItem value={selection5}>{selection5}</MenuItem>
+      <MenuItem value={selection6}>{selection6}</MenuItem>
     </Select>
   </FormControl>
   </div>

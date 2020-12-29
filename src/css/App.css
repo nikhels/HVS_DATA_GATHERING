@@ -58,7 +58,7 @@ html {
   max-height: 45px;
   display:grid;
   margin-top:25px;
-  grid-template-columns:50px 300px 300px 570px auto;
+  grid-template-columns:50px 300px 300px 300px 270px auto;
   column-gap: 10px;
   box-shadow:0 4px 2px -2px #34495e, 0 -2px 4px -2px #34495e;
   /* box-shadow:0 4px 4px -2px #34495e, */

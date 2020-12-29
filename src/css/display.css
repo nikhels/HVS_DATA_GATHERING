@@ -278,6 +278,13 @@ font-size: 20px;
   background-color: #c7c7c7;
 }
 
+.display__delete-line {
+  /* background-color:#878787; */
+  background-color:red;
+
+
+}
+
 #edit-column {
   background-color: #c7c7c7;
   padding-top: 5px;

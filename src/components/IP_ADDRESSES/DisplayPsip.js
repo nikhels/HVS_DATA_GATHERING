@@ -41,7 +41,6 @@ export default function DisplayPsip() {
     psipPassword,
   } = auxiliaryInformation.psipInformation
 
-  console.log(auxiliaryInformation.psipInformation)
 
   return (
     <>
@@ -199,6 +198,7 @@ export default function DisplayPsip() {
                   <td className="display__text-box large">{psip2Subnet}</td>
                   <td className="display__text-box large">{psip2Gateway}</td>
                   <td className="display__text-box large">{psip2Port}</td>
+
                 </tr>
               </tbody>
             )}
@@ -262,6 +262,12 @@ export default function DisplayPsip() {
                         handleChanges({ psip2Port: e.target.value })
                       }
                     />
+                  </td>
+                  <td className="display__delete-line">
+                    <button 
+                    className="btn-secondary"
+                    onClick={() => handleChanges({ psip2Selected: false, secondaryPsipToggle: false })}
+                    >DELETE</button>
                   </td>   
                      </tr> 
                       </tbody>

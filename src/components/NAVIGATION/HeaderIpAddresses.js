@@ -11,16 +11,30 @@ export default function HeaderIpAddresses() {
     auxiliaryInformation,
     loadOrCreateIpAddresses,
     // equipmentSelection,
-    handlePsipSourceSelection
+    handlePsipSourceSelection,
+    setIpAddressesCount,
+    ipAddressesCount,
   } = useContext(GlobalContext)
 
   const psipSourceData = {
     label:"PSIP Source",
     className:"input__dropdown large",
     functionCall: handlePsipSourceSelection,
-    displayValue:auxiliaryInformation.psip,
+    displayValue:auxiliaryInformation.psipInformation.psip,
     selection1: "Internal Spooling",
     selection2: "Downstream",
+  }
+  const ipCountSelection = {
+    label:"IP Addresses Needed ",
+    className:"input__dropdown large",
+    functionCall: setIpAddressesCount,
+    displayValue:ipAddressesCount,
+    selection1: "1",
+    selection2: "2",
+    selection3: "3",
+    selection4: "4",
+    selection5: "5",
+    selection6: "6",
   }
   
  
@@ -31,19 +45,8 @@ export default function HeaderIpAddresses() {
     <div className="header">
     <div className="header__input-container six-column"> 
       <InputDropdown data = {psipSourceData}/> 
-          {/* {auxiliaryInformation.psip === "Internal Spooling" &&
-            <div> 
-            <TextField id="filled-basic" 
-              label="PSIP Port" 
-              variant="filled" 
-              type="text" 
-              className="input__text-box small"
-              defaultValue= {auxiliaryInformation.psipPort}
-              size="small"
-              color="secondary"
-              onChange = {(e) => ipAddressesDispatch({type:ACTIONS.CHANGE,payload:{psipPort:parseInt(e.target.value)}})} /> 
-            </div>
-          } */}
+      <InputDropdown data = {ipCountSelection}/> 
+
           <div> 
             <TextField id="filled-basic" 
               label="DNS Server 1" 
