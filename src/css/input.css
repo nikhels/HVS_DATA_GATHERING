@@ -2,7 +2,7 @@
 select {
   cursor: pointer;
   font-family: Karla;
-  font-size: 17px;
+  font-size: 16px;
   outline: none;
   display: block;
 
@@ -11,7 +11,7 @@ input {
   font-weight: bold;
   font-family: Karla;
   border:2px solid white;
-  font-size: 17px; 
+  font-size: 16px; 
   outline: none;
   color:black;
   margin:2px;
@@ -54,6 +54,7 @@ input {
   margin:5px;
   font-size:16px;
   border-radius: 5px;
+  cursor: pointer;
 }
 .btn-secondary{
   height:33px;
@@ -62,6 +63,7 @@ input {
   font-size:15px;
   border-radius: 5px;
   background-color:#eeeeee;
+  cursor: pointer;
   /* font-weight: bold; */
 
   }   
@@ -76,6 +78,15 @@ background:yellow;
   margin-top:10px;
 
 }
+
+.btn-remove{
+  font-size:16px;
+  height:28px;
+  width:33px;
+  align-content: center;
+}
+
+
 .large-icon{
   font-size:15px;
 

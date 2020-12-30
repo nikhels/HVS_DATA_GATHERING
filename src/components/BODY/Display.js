@@ -25,7 +25,9 @@ export default function Display() {
     auxiliaryInformation,
     auxiliaryInformationDispatch,
   } = useContext(GlobalContext);
-  
+
+  const { notes } = auxiliaryInformation;
+
   function handleChanges(e) {
     const psipChanges = { ...auxiliaryInformation.psipInformation, ...e };
     auxiliaryInformationDispatch({
@@ -34,7 +36,13 @@ export default function Display() {
     });
   }
 
-
+  function updateNoteAuxiliary(e) {
+    const updatedNoteAuxiliary = { ...notes, ...e };
+    auxiliaryInformationDispatch({
+      type: ACTIONS.CHANGE,
+      payload: { notes: updatedNoteAuxiliary },
+    });
+  }
 
   return (
     <>
@@ -155,7 +163,7 @@ export default function Display() {
         </div>
       )}
 
-      <div className="left-content">
+      <div className="page-content">
         {equipmentSelection && (
           <div className="display__container">
             {" "}
@@ -165,6 +173,35 @@ export default function Display() {
             {auxiliaryInformation.psipInformation.psipToggle && <DisplayPsip />}
             {/* <DisplayPsip /> */}
             {channels.length > 0 && <DisplayChannelTables />}
+          </div>
+        )}
+        {!notes.display && channels.length > 0 && (
+          <button
+            className="btn-secondary "
+            onClick={() => updateNoteAuxiliary({ display: true })}
+          >
+            {" "}
+            <HiPlus /> Additional Notes {" "}
+          </button>
+        )}
+
+        {notes.display && channels.length > 0 && (
+          <div className="display__text-area-container">
+          <button
+            className="btn-remove "
+            onClick={() => updateNoteAuxiliary({ display: false })}
+          >
+         <HiX />
+          </button> 
+          
+            <textarea
+              rows="3"
+              cols="68"
+              wrap="hard"
+              onChange={(e) => updateNoteAuxiliary({ content: e.target.value })}
+              value={notes.content}
+              placeholder="Additional Notes"
+            />
           </div>
         )}
       </div>

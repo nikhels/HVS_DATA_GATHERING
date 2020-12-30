@@ -64,15 +64,22 @@ function App() {
     tsid: "",
     channelCount: 0,
     callLetters: "XXXX",
-    units: 1,
-    dns1: "8.8.8.8",
-    dns2: "8.8.4.4",
-    ntp: "129.6.15.28",
     ipAddressesCount: 3,
     psip: "",
     psipPort: "",
-    notes: "",
     psipInformation: psipDefaults,
+    ipAuxiliary: {
+      subnet: "255.255.255.0",
+      gateway: "192.168.1.1",
+      dns1: "8.8.8.8",
+      dns2: "8.8.4.4",
+      ntp: "129.6.15.28",
+      selected:false,
+    },
+    notes: {
+      display:false,
+      content:""
+    }
   };
 
   const initialChannelsState = localStorage.getItem(LOCAL_STORAGE_KEY_CHANNELS)
@@ -110,8 +117,8 @@ function App() {
     ipAddresses: false,
     submit: false,
   });
-  
-  const [ipAddressesCount,setIpAddressesCount] = useState(1);
+
+  const [ipAddressesCount, setIpAddressesCount] = useState(1);
   const [channels, channelDispatch] = useReducer(
     updateChannels,
     initialChannelsState
@@ -138,9 +145,9 @@ function App() {
 
   // const [psipToggle,setPsipToggle]= useState()
 
-// console.log(ipAddresses)
-// console.log(ipAddressesCount)
-// console.log(auxiliaryInformation)
+  // console.log(ipAddresses)
+  // console.log(ipAddressesCount)
+  // console.log(auxiliaryInformation)
 
   function submitParameters() {
     Axios.post("http://localhost:3001/create", {
@@ -252,10 +259,9 @@ function App() {
       });
     }
     if (ipAddresses.length !== 0 && ipAddresses.length < ipAddressesCount) {
-      for (let x = ipAddresses.length + 1; x <= ipAddressesCount; x++){
-        console.log(ipAddresses)
-        ipAddressesDispatch({type: ACTIONS.ADD });
-      
+      for (let x = ipAddresses.length + 1; x <= ipAddressesCount; x++) {
+        console.log(ipAddresses);
+        ipAddressesDispatch({ type: ACTIONS.ADD });
       }
     }
     if (ipAddresses.length !== 0 && ipAddresses.length > ipAddressesCount) {
@@ -270,15 +276,15 @@ function App() {
     const psipChanges = { ...auxiliaryInformation.psipInformation, ...e };
     auxiliaryInformationDispatch({
       type: ACTIONS.CHANGE,
-      payload: { psipInformation: psipChanges},
+      payload: { psipInformation: psipChanges },
     });
   }
 
   function handlePsipSourceSelection(e) {
     if (equipmentSelection === "Harmonic X2S") {
       if (e === "Downstream") {
-        updatePsipInformation({ psip: e, psipToggle:false})
-        setIpAddressesCount(2)
+        updatePsipInformation({ psip: e, psipToggle: false });
+        setIpAddressesCount(2);
         // auxiliaryInformationDispatch({
         //   type: ACTIONS.CHANGE,
         //   payload: { ipAddressesCount: 2},
@@ -286,21 +292,20 @@ function App() {
         // setPsipToggle(false)
       }
       if (e === "Internal Spooling") {
-        updatePsipInformation({ psip: e,psipToggle: true})
-        setIpAddressesCount(3)
+        updatePsipInformation({ psip: e, psipToggle: true });
+        setIpAddressesCount(3);
         // auxiliaryInformationDispatch({
         //   type: ACTIONS.CHANGE,
         //   payload: { ipAddressesCount: 3},
         // });
       }
-        
-        // setPsipToggle(true)     
-    } 
-    else {
-      updatePsipInformation({ psip: e, ipAddressesCount: 1})
-      }
+
+      // setPsipToggle(true)
+    } else {
+      updatePsipInformation({ psip: e, ipAddressesCount: 1 });
     }
-  
+  }
+
   useEffect(() => {
     localStorage.setItem(LOCAL_STORAGE_KEY_CHANNELS, JSON.stringify(channels));
   }, [channels]);
@@ -336,7 +341,6 @@ function App() {
     localStorage.setItem(LOCAL_STORAGE_KEY_EQUIPMENT, JSON.stringify([]));
     localStorage.setItem(LOCAL_STORAGE_KEY_AUXILIARY, JSON.stringify([]));
   }
-
 
   function updateChannels(channels, action) {
     const { channelCount, virtual, physical } = auxiliaryInformation;
@@ -402,7 +406,7 @@ function App() {
         for (let x = 1; x <= ipAddressesCount; x++) {
           ipAddresses = [
             ...ipAddresses,
-            new IpAddressConstructor(x, ipAddressesCount,psip),
+            new IpAddressConstructor(x, ipAddressesCount, psip),
           ];
         }
         return ipAddresses;
@@ -414,13 +418,16 @@ function App() {
         ipAddressChanges[index] = action.payload.ipAddress;
         return (ipAddresses = ipAddressChanges);
       case ACTIONS.ADD:
-          const newIpAddresses = [
-            new IpAddressConstructor(ipAddresses.length + 1, ipAddressesCount,psip),
-          ];
-          const addIpAddresses = [...ipAddresses, ...newIpAddresses];
-          return addIpAddresses;
-           
-        
+        const newIpAddresses = [
+          new IpAddressConstructor(
+            ipAddresses.length + 1,
+            ipAddressesCount,
+            psip
+          ),
+        ];
+        const addIpAddresses = [...ipAddresses, ...newIpAddresses];
+        return addIpAddresses;
+
       case ACTIONS.REMOVE:
         const newArray = ipAddresses.slice(0, ipAddressesCount);
         return newArray;
@@ -484,7 +491,7 @@ function App() {
     ipAddressesEditCount,
     updatePsipInformation,
     setIpAddressesCount,
-    ipAddressesCount
+    ipAddressesCount,
   };
 
   return (

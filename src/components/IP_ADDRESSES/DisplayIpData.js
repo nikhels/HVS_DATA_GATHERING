@@ -5,7 +5,7 @@ import { GlobalContext } from "../App";
 import { ACTIONS } from "../App";
 import { FaCheckCircle } from "react-icons/fa";
 export default function IpDisplayList(ipAddress) {
-  const { name, ip, subnet, gateway } = ipAddress;
+  const { name, ip,  } = ipAddress;
 
   const {
     ipAddressesDispatch,
@@ -46,8 +46,6 @@ export default function IpDisplayList(ipAddress) {
             </td>
             <td className="display__text-box large">{name}</td>
             <td className="display__text-box large">{ip}</td>
-            <td className="display__text-box large">{subnet}</td>
-            <td className="display__text-box large">{gateway}</td>
           </tr>
         </tbody>
       )}
@@ -79,7 +77,7 @@ export default function IpDisplayList(ipAddress) {
                 onChange={(e) => handleChanges({ ip: e.target.value })}
               />
             </td>
-            <td className="display__edit-text-box large">
+            {/* <td className="display__edit-text-box large">
               <input
                 type="text"
                 id="subnet"
@@ -94,7 +92,7 @@ export default function IpDisplayList(ipAddress) {
                 placeholder={gateway}
                 onChange={(e) => handleChanges({ gateway: e.target.value })}
               />
-            </td>
+            </td> */}
             {/* { name === "IP 3 - PSIP" &&
       <td className="display__text-box small">{auxiliaryInformation.psipPort}</td>}  
       { name !== "IP 3 - PSIP" &&

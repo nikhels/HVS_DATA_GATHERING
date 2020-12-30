@@ -5,12 +5,14 @@ export default function DisplayHeader() {
   const {
     equipmentTypeSelection,
     equipmentSelection,
-    auxiliaryInformation
+    auxiliaryInformation,
+
   } = useContext(GlobalContext)
   
-  const {tsid,callLetters} = auxiliaryInformation
+  const {tsid,callLetters,} = auxiliaryInformation
 
 
+ 
   return (
 
     <>
@@ -26,7 +28,9 @@ export default function DisplayHeader() {
     </div>
     <div className="display__sheet-header-secondary">
       <div className="display__sheet-sub-header">TSID: {tsid}</div>
-      {/* {channels[0].selected && <div className="display__editing-text"> EDITING CHANNELS</div>} */}
+      <div></div>
+      
+      
     </div>
 
 

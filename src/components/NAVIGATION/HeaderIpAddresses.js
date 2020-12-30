@@ -1,13 +1,13 @@
 import React, { useContext } from 'react'
 // import useToggle from './useToggle'
-import { GlobalContext, ACTIONS, } from '../App'
+import { GlobalContext, } from '../App'
 import InputDropdown from '../INPUT/InputDropdown'
-import TextField from '@material-ui/core/TextField'
+// import TextField from '@material-ui/core/TextField'
 import { FaCheck} from 'react-icons/fa'
 
 export default function HeaderIpAddresses() {
   const {    
-    auxiliaryInformationDispatch,
+
     auxiliaryInformation,
     loadOrCreateIpAddresses,
     // equipmentSelection,
@@ -25,7 +25,7 @@ export default function HeaderIpAddresses() {
     selection2: "Downstream",
   }
   const ipCountSelection = {
-    label:"IP Addresses Needed ",
+    label:"IP Addresses Required ",
     className:"input__dropdown large",
     functionCall: setIpAddressesCount,
     displayValue:ipAddressesCount,
@@ -47,7 +47,7 @@ export default function HeaderIpAddresses() {
       <InputDropdown data = {psipSourceData}/> 
       <InputDropdown data = {ipCountSelection}/> 
 
-          <div> 
+          {/* <div> 
             <TextField id="filled-basic" 
               label="DNS Server 1" 
               variant="filled" 
@@ -85,7 +85,7 @@ export default function HeaderIpAddresses() {
               color="secondary"
               onBlur = {(e) => auxiliaryInformationDispatch({type:ACTIONS.CHANGE, payload:{ntp:e.target.value}})} 
               /> 
-            </div>
+            </div> */}
 
       <button className="btn-secondary header__apply-btn" onClick= {() => loadOrCreateIpAddresses()}><FaCheck /> APPLY</button>
     </div>
