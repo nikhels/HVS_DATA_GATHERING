@@ -270,9 +270,8 @@ font-size: 20px;
 
 .display__text-area-container {
   display:grid;
-  grid-template-columns: 40px auto;
-  margin: auto;
-  margin-top: 0px;
+  grid-template-columns: auto auto;
+
   /* padding-left: 10px;
   padding-right: 10px; */
   /* padding-left:30px; */

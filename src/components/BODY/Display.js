@@ -179,6 +179,7 @@ export default function Display() {
           <button
             className="btn-secondary "
             onClick={() => updateNoteAuxiliary({ display: true })}
+            id="note-button"
           >
             {" "}
             <HiPlus /> Additional Notes {" "}
@@ -190,13 +191,14 @@ export default function Display() {
           <button
             className="btn-remove "
             onClick={() => updateNoteAuxiliary({ display: false })}
+            id="note-button"
           >
          <HiX />
           </button> 
           
             <textarea
               rows="3"
-              cols="68"
+              cols="170"
               wrap="hard"
               onChange={(e) => updateNoteAuxiliary({ content: e.target.value })}
               value={notes.content}

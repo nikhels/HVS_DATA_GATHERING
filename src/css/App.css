@@ -10,7 +10,7 @@
 @import './navigation.css';
 
 @media print {
-  #edit-column-header, #edit-column, #edit-column-selected,#edit-column-header-selected {
+  #edit-column-header, #edit-column, #edit-column-selected,#edit-column-header-selected,#note-button {
     display:none;
   }
   @page { size: landscape; }
