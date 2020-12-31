@@ -107,6 +107,7 @@
   font-size: 14px;
   vertical-align: center;
   border: 1px solid #878787;
+  border-style: none solid solid solid;
   height: 35px;
   /* width:184px; */
 }.wide {width:240px;}.medium {width:165px;}
@@ -115,8 +116,8 @@
   table-layout: fixed !important;
   width: 30px !important;
   font-size: 16px;
-  border: 2px #878787;
-  border-style: solid none solid none;
+  /* border: 2px #878787;
+  border-style: solid none solid none; */
   background-color: #474747;
 }
 .display__header-normal.edit.selected {
