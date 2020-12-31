@@ -44,7 +44,7 @@ export default function DisplayPsip() {
 
   return (
     <>
-      <div className="display__channel-psip-background">
+      <div className="display__background">
         <div className="display__channel-psip-container">
           <table>
             <thead>

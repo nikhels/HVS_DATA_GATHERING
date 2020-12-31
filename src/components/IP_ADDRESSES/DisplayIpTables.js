@@ -32,7 +32,7 @@ export default function IpDisplay() {
 
   return (
     <>
-      <div className="display__channel-ip-background">
+      <div className="display__background">
         <div className="display__channel-ip-container">
           <div>
           <table>
@@ -57,8 +57,8 @@ export default function IpDisplay() {
                     <div className="display__edit-all-text">ALL</div>
                   </th>
                 )}
-                <th className="display__header-normal wide">IP INTERFACE</th>
-                <th className="display__header-normal wide">IP ADDRESS</th>
+                <th className="display__header-normal large">IP INTERFACE</th>
+                <th className="display__header-normal large">IP ADDRESS</th>
                 {/* <th className="display__header-normal">PORT</th> */}
               </tr>
             </thead>
@@ -75,11 +75,11 @@ export default function IpDisplay() {
                   >
                     <div className="display__edit-all-text"> </div>
                   </th>
-                  <th className="display__header-normal">SUBNET</th>
-                  <th className="display__header-normal">GATEWAY</th>
-                  <th className="display__header-normal">DNS 1</th>
-                  <th className="display__header-normal">DNS 2</th>
-                  <th className="display__header-normal">NTP SERVER</th>
+                  <th className="display__header-normal medium">SUBNET</th>
+                  <th className="display__header-normal medium">GATEWAY</th>
+                  <th className="display__header-normal medium">DNS 1</th>
+                  <th className="display__header-normal medium">DNS 2</th>
+                  <th className="display__header-normal medium">NTP SERVER</th>
                 </tr>
               </thead>
 

@@ -2,7 +2,7 @@ import React,{ useContext} from 'react'
 import { GlobalContext } from '../App'
 import { FiEdit } from 'react-icons/fi'
 import DisplayChannelData from './DisplayChannelData'
-
+import IpOutput from '../TRANSPORTS/IpOutput'
 
 
 
@@ -22,7 +22,7 @@ const channelsList = channels.map(channel => {
 
   return (
     <>
-  
+  <div className="display__background">
     <table className="display__channel-container">
     <thead>
       <tr> 
@@ -35,7 +35,7 @@ const channelsList = channels.map(channel => {
         <FiEdit /><div className="display__edit-all-text">ALL</div>
         </th>}
         <th className="display__header-normal">INPUT TYPE</th>
-        <th className="display__header-normal">NAME & AFFILIATION</th>
+        <th className="display__header-normal">DISPLAY NAME & AFFILIATION</th>
         <th className="display__header-normal">VIRTUAL CHANNEL</th>
         <th className="display__header-normal">PHYSICAL CHANNEL</th>
         <th className="display__header-normal">INPUT VIDEO FORMAT</th>
@@ -52,9 +52,10 @@ const channelsList = channels.map(channel => {
         <th className="display__header-normal">AUDIO 2 BITRATE</th>   
       </tr>
     </thead>
-        {channelsList}
-      
+        {channelsList}   
     </table>
+    </div>
+    <IpOutput />
 
     </>
   )
