@@ -46,26 +46,26 @@ export default function DisplayPsip() {
     <>
       <div className="display__channel-psip-background">
         <div className="display__channel-psip-container">
-          <table className="display__header-left">
+          <table>
             <thead>
               <tr>
                 <th
-                  className="display__channel-header edit"
+                  className="display__header-normal edit"
                   id="edit-column-header"
                   onClick={() => handleChanges({ secondaryPsipToggle: true })}
                 >
                   <HiPlus />
                   <div className="display__edit-all-text">ADD</div>
                 </th>
-                <th className="display__channel-header">PSIP UNIT</th>
-                <th className="display__channel-header">IP ADDRESS</th>
-                <th className="display__channel-header">SUBNET</th>
-                <th className="display__channel-header">GATEWAY</th>
-                <th className="display__channel-header">PORT</th>
-                <th className="display__channel-header">PROVIDER</th>
-                <th className="display__channel-header">USERNAME</th>
-                <th className="display__channel-header">PASSWORD</th>
-                {/* <th className="display__channel-header">PORT</th> */}
+                <th className="display__header-normal medium ">PSIP UNIT</th>
+                <th className="display__header-normal medium ">IP ADDRESS</th>
+                <th className="display__header-normal medium ">SUBNET</th>
+                <th className="display__header-normal medium ">GATEWAY</th>
+                <th className="display__header-normal medium ">PORT</th>
+                <th className="display__header-normal medium ">PROVIDER FTP</th>
+                <th className="display__header-normal medium ">USERNAME</th>
+                <th className="display__header-normal medium ">PASSWORD</th>
+                {/* <th className="display__header-normal">PORT</th> */}
               </tr>
             </thead>
             {!psip1Selected && (

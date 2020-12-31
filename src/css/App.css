@@ -23,21 +23,28 @@
 } */
 
 body {
-    /* font-family: Poppins; */
-    /* font-family: Karla; */
      font-family:avenir;
-    /* font-family: 'Times New Roman', Times, serif; */
 }
 html {
    overflow-y: scroll;
 }
 
+textarea {
+  font-size: 15px;
+  resize: vertical;
+  font-family: Lora;
+  border-radius: 5px;
+  /* border:2px solid #878787; */
+}
+table {
+  border-collapse: collapse;
+}
+
+
 .wrapper {
     display: grid;
     max-width:1440px;
     margin:auto;
-    /* background-color: #DCDCDC; */
-    /* background-color: #e0e0e0; */
     background-color:#ECF0F1;
     grid-template-columns: 480px 480px 480px;
     grid-template-areas: 

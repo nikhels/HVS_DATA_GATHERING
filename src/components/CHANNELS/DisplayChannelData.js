@@ -67,10 +67,10 @@ export default function ChannelsDisplayList(channels) {
         <td className="display__text-box small">{pcrPid}</td>
         <td className="display__text-box small" >{audio1Pid}</td>
         <td className="display__text-box large">{audio1Type}</td>
-        <td className="display__text-box large">{audio1Bitrate}</td>
+        <td className="display__text-box small">{audio1Bitrate}</td>
         <td className="display__text-box small" >{audio2Pid}</td>
         <td className="display__text-box large">{audio2Type}</td>
-        <td className="display__text-box large">{audio2Bitrate}</td>
+        <td className="display__text-box small">{audio2Bitrate}</td>
       </tr>
     </tbody>}
 
@@ -193,7 +193,7 @@ export default function ChannelsDisplayList(channels) {
             
           </select>   
         </td>
-        <td className="display__edit-text-box large">
+        <td className="display__edit-text-box small">
         <select     
             onChange = {(e) => handleChanges({audio1Bitrate:e.target.value})} 
             defaultValue={audio1Bitrate}>
@@ -228,7 +228,7 @@ export default function ChannelsDisplayList(channels) {
             <option value="AC-4">AC-4</option>
             </select>    
         </td>
-        <td className="display__edit-text-box large">
+        <td className="display__edit-text-box small">
           <select 
             
             onChange = {(e) => handleChanges({audio2Bitrate:e.target.value})} 

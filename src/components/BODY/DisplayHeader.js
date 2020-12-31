@@ -23,8 +23,8 @@ export default function DisplayHeader() {
         </div>
       </div>
       {auxiliaryInformation.tsid &&
-      <div className="display__sheet-header-secondary">
-        <div className="display__sheet-sub-header">TSID: {tsid}</div>
+      <div className="display__line-break">
+        {/* <div className="display__sheet-sub-header">TSID: {tsid}</div> */}
       </div>}
     </>
   );

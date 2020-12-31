@@ -22,9 +22,11 @@ export default function HeaderEquipment() {
 
 
 function handleSetNewEquipmentToggle(){
+  // window.localStorage.clear();
+  resetEquipmentSheet()
+  // window.location.reload();
   setNewEquipmentToggle(true)
   setExistingEquipmentToggle(false)
-  resetEquipmentSheet()
 }
 function handleSetExistingEquipmentToggle(){
   setNewEquipmentToggle(false)
@@ -76,7 +78,7 @@ function handleSetExistingEquipmentToggle(){
       <div className="header__input-container two-column">
       <div className="header__button-container">
         <button className="btn-secondary " onClick= {() => handleSetNewEquipmentToggle()}> ADD NEW</button> 
-        <button className="btn-secondary " onClick= {() => handleSetExistingEquipmentToggle()}disabled={true}> FIND EXISTING </button>
+        <button className="btn-secondary " onClick= {() => handleSetExistingEquipmentToggle()}> FIND EXISTING </button>
       </div>
         <div className="header__input-container four-column">
         

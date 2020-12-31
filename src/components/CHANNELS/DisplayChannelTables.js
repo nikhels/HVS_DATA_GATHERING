@@ -27,29 +27,29 @@ const channelsList = channels.map(channel => {
     <thead>
       <tr> 
     {!channelEditToggle &&
-        <th className="display__channel-header edit" id ="edit-column-header" onClick={() => handleChannelEditToggle(true) }>
+        <th className="display__header-normal edit" id ="edit-column-header" onClick={() => handleChannelEditToggle(true) }>
         <div className="display__edit-all-text">EDIT ALL</div>
         </th>}
     {channelEditToggle &&
-        <th className="display__channel-header edit selected" id ="edit-column-header-selected" onClick={() => handleChannelEditToggle(false)}>
+        <th className="display__header-normal edit selected" id ="edit-column-header-selected" onClick={() => handleChannelEditToggle(false)}>
         <FiEdit /><div className="display__edit-all-text">ALL</div>
         </th>}
-        <th className="display__channel-header">INPUT TYPE</th>
-        <th className="display__channel-header">CHANNEL NAME & AFFILIATION</th>
-        <th className="display__channel-header">VIRTUAL CHANNEL</th>
-        <th className="display__channel-header">PHYSICAL CHANNEL</th>
-        <th className="display__channel-header">INPUT VIDEO FORMAT</th>
-        <th className="display__channel-header">OUTPUT VIDEO FORMAT</th>
-        <th className="display__channel-header">AFD</th>
-        <th className="display__channel-header">OUTPUT ASPECT RATIO</th>
-        <th className="display__channel-header">PMT <br />PID</th>
-        <th className="display__channel-header">PCR/VIDEO PID</th>
-        <th className="display__channel-header">AUDIO 1 PID</th>
-        <th className="display__channel-header">AUDIO 1 TYPE</th>
-        <th className="display__channel-header">AUDIO 1 BITRATE</th>
-        <th className="display__channel-header">AUDIO 2 PID</th>
-        <th className="display__channel-header">AUDIO 2 TYPE</th>
-        <th className="display__channel-header">AUDIO 2 BITRATE</th>   
+        <th className="display__header-normal">INPUT TYPE</th>
+        <th className="display__header-normal">NAME & AFFILIATION</th>
+        <th className="display__header-normal">VIRTUAL CHANNEL</th>
+        <th className="display__header-normal">PHYSICAL CHANNEL</th>
+        <th className="display__header-normal">INPUT VIDEO FORMAT</th>
+        <th className="display__header-normal">OUTPUT VIDEO FORMAT</th>
+        <th className="display__header-normal">AFD</th>
+        <th className="display__header-normal">OUTPUT ASPECT RATIO</th>
+        <th className="display__header-normal">PMT <br />PID</th>
+        <th className="display__header-normal">PCR/VIDEO PID</th>
+        <th className="display__header-normal">AUDIO 1 PID</th>
+        <th className="display__header-normal">AUDIO 1 TYPE</th>
+        <th className="display__header-normal">AUDIO 1 BITRATE</th>
+        <th className="display__header-normal">AUDIO 2 PID</th>
+        <th className="display__header-normal">AUDIO 2 TYPE</th>
+        <th className="display__header-normal">AUDIO 2 BITRATE</th>   
       </tr>
     </thead>
         {channelsList}

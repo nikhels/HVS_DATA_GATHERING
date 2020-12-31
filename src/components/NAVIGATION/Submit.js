@@ -29,7 +29,7 @@ const {
       <button className="btn-secondary header__apply-btn"> Link <FiExternalLink /></button>
       <div></div>
       <div className="header__submit">Review sheet for accuracy and submit</div>
-      <button className="btn-secondary header__apply-btn" onClick={() => submitParameters()} disabled={true}><FaCheck /> SUBMIT</button>
+      <button className="btn-secondary header__apply-btn" onClick={() => submitParameters()} ><FaCheck /> SUBMIT</button>
         
 
       </div>

@@ -64,7 +64,7 @@ function App() {
     tsid: "",
     channelCount: 0,
     callLetters: "XXXX",
-    ipAddressesCount: 3,
+    ipAddressesCount: 0,
     psip: "",
     psipPort: "",
     psipInformation: psipDefaults,
@@ -337,9 +337,9 @@ function App() {
   function resetEquipmentSheet() {
     localStorage.setItem(LOCAL_STORAGE_KEY_CHANNELS, JSON.stringify([]));
     localStorage.setItem(LOCAL_STORAGE_KEY_IPADDRESSES, JSON.stringify([]));
-    localStorage.setItem(LOCAL_STORAGE_KEY_EQUIPMENTTYPE, JSON.stringify([]));
-    localStorage.setItem(LOCAL_STORAGE_KEY_EQUIPMENT, JSON.stringify([]));
-    localStorage.setItem(LOCAL_STORAGE_KEY_AUXILIARY, JSON.stringify([]));
+    localStorage.setItem(LOCAL_STORAGE_KEY_EQUIPMENTTYPE, JSON.stringify(""));
+    localStorage.setItem(LOCAL_STORAGE_KEY_EQUIPMENT, JSON.stringify(""));
+    localStorage.setItem(LOCAL_STORAGE_KEY_AUXILIARY, JSON.stringify(auxiliaryDefaults));
   }
 
   function updateChannels(channels, action) {
