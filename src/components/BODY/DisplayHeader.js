@@ -8,7 +8,7 @@ export default function DisplayHeader() {
     auxiliaryInformation,
   } = useContext(GlobalContext);
 
-  const { tsid, callLetters } = auxiliaryInformation;
+  const { callLetters } = auxiliaryInformation;
 
   return (
     <>
