@@ -1,9 +1,10 @@
 import React, { useContext } from "react";
 import { GlobalContext } from "../App";
 import DisplayIpData from "./DisplayIpData";
-import { FiEdit } from "react-icons/fi";
 import { ACTIONS } from "../App";
-import { FaCheckCircle } from "react-icons/fa";
+import {EditIcon,SaveIcon, SaveAllIcon } from "../DEFAULTS/ButtonIcons";
+
+
 export default function IpDisplay() {
   const {
     ipAddresses,
@@ -44,6 +45,7 @@ export default function IpDisplay() {
                     id="edit-column-header"
                     onClick={() => handleIpAddressesEditToggle(true)}
                   >
+                  
                     <div className="display__edit-all-text"> EDIT ALL</div>
                   </th>
                 )}
@@ -53,8 +55,8 @@ export default function IpDisplay() {
                     id="edit-column-header-selected"
                     onClick={() => handleIpAddressesEditToggle(false)}
                   >
-                    <FiEdit />
-                    <div className="display__edit-all-text">ALL</div>
+                    <SaveAllIcon />
+                    
                   </th>
                 )}
                 <th className="display__header-normal large">IP INTERFACE</th>
@@ -91,7 +93,7 @@ export default function IpDisplay() {
                       id="edit-column"
                     >
                       {" "}
-                      <FiEdit />
+                      <EditIcon />
                     </td>
                     <td className="display__text-box large" id="subnet ">
                       {subnet}
@@ -116,11 +118,10 @@ export default function IpDisplay() {
                   <tr>
                     <td
                       onClick={(e) => updateIpAuxiliary({ selected: false })}
-                      className="channel__edit-field"
                       id="edit-column-selected"
                     >
                       {" "}
-                      <FaCheckCircle />
+                      <SaveIcon />
                     </td>
                     <td className="display__edit-text-box large">
                       <input

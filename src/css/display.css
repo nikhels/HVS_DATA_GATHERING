@@ -13,6 +13,8 @@
   border-radius: 5px 5px 0px 0px;
   background-color: #474747;
   color: #ecf0f1;
+  border: 3px #878787;
+  border-style: solid solid none solid;
   
 }
 
@@ -217,21 +219,27 @@
 }
 
 #edit-column {
-  /* background-color: #c7c7c7; */
+
   padding-top: 5px;
+  font-size:20px;
   table-layout: fixed!important;
-  width:35px!important;
-  /* width: 1em; */
+  width:32px!important;
+  padding-left: 5px;
+  padding-top:7px; 
+  margin-right:5px;
   border-bottom: 1px solid #878787;
+  color:#474747;
   
 }
 
 #edit-column-selected {
   background-color: red;
+  font-size:22px;
   table-layout: fixed!important;
-  width:35px!important;
+  width:32px!important;
   color: #474747;
-  padding-top: 5px;
+  padding-left: 5px;
+  padding-top:7px; 
   border-bottom: 1px solid #878787;
   /* outline:1.5px solid #878787;
   outline-offset: -1.5px; */

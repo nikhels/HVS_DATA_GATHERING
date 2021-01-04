@@ -1,9 +1,8 @@
 import React,{ useContext} from 'react'
 import { GlobalContext } from '../App'
-import { FiEdit } from 'react-icons/fi'
 import DisplayChannelData from './DisplayChannelData'
 import IpOutput from '../TRANSPORTS/IpOutput'
-
+import { SaveAllIcon } from "../DEFAULTS/ButtonIcons";
 
 
 export default function DisplayChannelTables() {
@@ -32,7 +31,7 @@ const channelsList = channels.map(channel => {
         </th>}
     {channelEditToggle &&
         <th className="display__header-normal edit selected" id ="edit-column-header-selected" onClick={() => handleChannelEditToggle(false)}>
-        <FiEdit /><div className="display__edit-all-text">ALL</div>
+        <SaveAllIcon />
         </th>}
         <th className="display__header-normal">INPUT TYPE</th>
         <th className="display__header-normal">DISPLAY NAME & AFFILIATION</th>

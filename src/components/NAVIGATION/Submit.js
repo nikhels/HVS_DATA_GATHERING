@@ -21,7 +21,7 @@ const {
     
     <div className="header">
       <div className="header__input-container submit"> 
-      <button className="btn-secondary header__apply-btn" onClick={() =>handlePrint() }> <GrDocumentPdf /> SAVE  / <BiPrinter /> PRINT </button>
+      <button className="btn-secondary header__apply-btn" onClick={() =>handlePrint() }> <GrDocumentPdf /> DOWNLOAD  / <BiPrinter /> PRINT </button>
       
         
       {/* <button className="btn-secondary header__apply-btn"> Print <BiPrinter /></button> */}

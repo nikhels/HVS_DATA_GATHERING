@@ -1,11 +1,17 @@
 import React, { useContext } from "react";
-import { FiEdit } from "react-icons/fi";
+// import { FiEdit } from "react-icons/fi";
 import { GlobalContext } from "../App";
 // import IpInputField from './IpInputField'
 import { ACTIONS } from "../App";
-import { FaCheckCircle } from "react-icons/fa";
+// import { FaCheckCircle } from "react-icons/fa";
+
+// import { RiEditBoxFill } from "react-icons/ri";
+// import { FaEdit } from "react-icons/fa";
+
+import { EditIcon, SaveIcon } from "../DEFAULTS/ButtonIcons";
+
 export default function IpDisplayList(ipAddress) {
-  const { name, ip,  } = ipAddress;
+  const { name, ip } = ipAddress;
 
   const {
     ipAddressesDispatch,
@@ -42,7 +48,7 @@ export default function IpDisplayList(ipAddress) {
               id="edit-column"
             >
               {" "}
-              <FiEdit />
+              <EditIcon />
             </td>
             <td className="display__text-box large">{name}</td>
             <td className="display__text-box large">{ip}</td>
@@ -55,11 +61,10 @@ export default function IpDisplayList(ipAddress) {
           <tr>
             <td
               onClick={() => handleChanges({ selected: false })}
-              className="channel__edit-field"
               id="edit-column-selected"
             >
               {" "}
-              <FaCheckCircle />
+              <SaveIcon />
             </td>
             <td className="display__edit-text-box large">
               <input

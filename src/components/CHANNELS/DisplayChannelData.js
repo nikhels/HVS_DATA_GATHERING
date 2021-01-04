@@ -1,7 +1,6 @@
 import React, { useContext } from 'react'
 import { GlobalContext, ACTIONS } from '../App'
-import { FiEdit } from 'react-icons/fi'
-import { FaCheckCircle } from 'react-icons/fa'
+import { EditIcon, SaveIcon } from "../DEFAULTS/ButtonIcons";
 
 export default function ChannelsDisplayList(channels) {
   const { 
@@ -54,7 +53,7 @@ export default function ChannelsDisplayList(channels) {
     <>
     {!channels.selected && <tbody className = "display__channel-data" > 
       <tr>
-      <td onClick={() => handleChanges({selected:true})} id="edit-column"> <FiEdit /></td>
+      <td onClick={() => handleChanges({selected:true})} id="edit-column"> <EditIcon /></td>
         <td className="display__text-box small">{inputType}</td>
         <td className="display__text-box large">{name}</td>
         <td className="display__text-box small" >{virtual}</td>
@@ -77,7 +76,7 @@ export default function ChannelsDisplayList(channels) {
     {channels.selected && <tbody className = "display__channel-data selected" >  
       <tr>
         <td onClick={() => handleChanges({selected:false})} id="edit-column-selected">
-        <FaCheckCircle /></td>
+        <SaveIcon /></td>
         {/* INPUT TYPE SELECTION */}
         <td className="display__edit-text-box small">
         <select 

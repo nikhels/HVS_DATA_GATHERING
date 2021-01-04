@@ -1,8 +1,7 @@
 import React, { useContext } from "react";
 import { GlobalContext, ACTIONS } from "../App";
-import { FiEdit } from "react-icons/fi";
-import { FaCheckCircle } from "react-icons/fa";
 import { HiPlus } from "react-icons/hi";
+import { EditIcon, SaveIcon } from "../DEFAULTS/ButtonIcons";
 
 export default function DisplayPsip() {
   const { 
@@ -75,7 +74,7 @@ export default function DisplayPsip() {
                     onClick={() => handleChanges({ psip1Selected: true })}
                     id="edit-column"
                   >
-                    <FiEdit />
+                    <EditIcon />
                   </td>
                   <td className="display__text-box large">{psip1Name}</td>
                   <td className="display__text-box large">{psip1Ip}</td>
@@ -94,11 +93,10 @@ export default function DisplayPsip() {
                 <tr>
                   <td
                     onClick={() => handleChanges({ psip1Selected: false })}
-                    className="channel__edit-field"
                     id="edit-column-selected"
                   >
                     {" "}
-                    <FaCheckCircle />
+                    <SaveIcon />
                   </td>
                   <td className="display__edit-text-box large">
                     <input
@@ -191,7 +189,7 @@ export default function DisplayPsip() {
                     onClick={() => handleChanges({ psip2Selected: true })}
                     id="edit-column"
                   >
-                    <FiEdit />
+                    <EditIcon />
                   </td>
                   <td className="display__text-box large">{psip2Name}</td>
                   <td className="display__text-box large">{psip2Ip}</td>
@@ -207,11 +205,10 @@ export default function DisplayPsip() {
                 <tr>
                   <td
                     onClick={() => handleChanges({ psip2Selected: false })}
-                    className="channel__edit-field"
                     id="edit-column-selected"
                   >
                     {" "}
-                    <FaCheckCircle />
+                    <SaveIcon />
                   </td>
                   <td className="display__edit-text-box large">
                     <input
