@@ -1,5 +1,6 @@
 import React, { useContext } from 'react'
-import { GlobalContext, ACTIONS } from '../App'
+import { GlobalContext} from '../App'
+import { ACTIONS } from '../DEFAULTS/Defaults'
 import { EditIcon, SaveIcon } from "../DEFAULTS/ButtonIcons";
 
 export default function ChannelsDisplayList(channels) {
@@ -40,19 +41,19 @@ export default function ChannelsDisplayList(channels) {
     }
 
     if (changes.selected === false) {
-      console.log(channelEditCount)
       setChannelEditCount(channelEditCount - 1)
       if (channelEditCount > 1) setChannelEditToggle(false)
     }
     
-    channelDispatch({type:ACTIONS.CHANGE, payload: {id:channels.id, channel:{...channels,...changes}}})
+    channelDispatch({type:ACTIONS.CHANGE, payload: {id:channels.id, channel:{...channels,...changes}},info:auxiliaryInformation})
   }
   
   
   return (
     <>
-    {!channels.selected && <tbody className = "display__channel-data" > 
-      <tr>
+
+    {!channels.selected && 
+      <tr className = "display__channel-data">
       <td onClick={() => handleChanges({selected:true})} id="edit-column"> <EditIcon /></td>
         <td className="display__text-box small">{inputType}</td>
         <td className="display__text-box large">{name}</td>
@@ -71,10 +72,10 @@ export default function ChannelsDisplayList(channels) {
         <td className="display__text-box large">{audio2Type}</td>
         <td className="display__text-box small">{audio2Bitrate}</td>
       </tr>
-    </tbody>}
+    }
 
-    {channels.selected && <tbody className = "display__channel-data selected" >  
-      <tr>
+    {channels.selected &&  
+      <tr className = "display__channel-data selected" >
         <td onClick={() => handleChanges({selected:false})} id="edit-column-selected">
         <SaveIcon /></td>
         {/* INPUT TYPE SELECTION */}
@@ -241,7 +242,7 @@ export default function ChannelsDisplayList(channels) {
           </select>      
         </td>
       </tr>
-    </tbody>}
+    }
     
     
 

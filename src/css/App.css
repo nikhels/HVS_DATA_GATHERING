@@ -43,7 +43,7 @@ table {
 
 .wrapper {
     display: grid;
-    max-width:1440px;
+    width:1440px;
     margin:auto;
     background-color:#ECF0F1;
     grid-template-columns: 480px 480px 480px;

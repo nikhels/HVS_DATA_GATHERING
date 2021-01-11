@@ -51,7 +51,9 @@ const channelsList = channels.map(channel => {
         <th className="display__header-normal">AUDIO 2 BITRATE</th>   
       </tr>
     </thead>
-        {channelsList}   
+    <tbody  > 
+      {channelsList} 
+    </tbody>  
     </table>
     </div>
     <IpOutput />

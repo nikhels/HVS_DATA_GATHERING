@@ -1,33 +1,20 @@
 import React, { useContext } from 'react'
-import { GlobalContext,ACTIONS } from '../App'
+import { GlobalContext } from '../App'
+import { ACTIONS } from '../DEFAULTS/Defaults'
 import TextField from '@material-ui/core/TextField'
 // import InputDropdown from '../INPUT/InputDropdown';
 // import { ACTIONS } from './App'
 import { FaCheck} from 'react-icons/fa'
 export default function HeaderChannels() {
   const {
-    // channelDispatch,
+    auxiliaryInformation,
     auxiliaryInformationDispatch,
     // auxiliaryInformation,
     loadOrCreateChannels
     
   } = useContext(GlobalContext)
   
-  // const unitCountData = {
-  //   label:"Units",
-  //   className:"input__dropdown small",
-  //   functionCall: handleUnitCountSelection,
-  //   displayValue:auxiliaryInformation.units,
-  //   disabled:true,
-  //   selection1: 1,
-  //   selection2: 2,
-  // }
-  
-  // function handleUnitCountSelection(e){
-  //   auxiliaryInformationDispatch({type:ACTIONS.CHANGE, payload:{units:(e.target.value)}})
-  // }
-  
-
+ 
   return (
   <>
     {/* {equipmentSelection === "Harmonic X2S" && */}
@@ -42,7 +29,8 @@ export default function HeaderChannels() {
               className="input__text-box small"
               size="small"
               color="secondary"
-              onChange = {(e) => auxiliaryInformationDispatch({type:ACTIONS.CHANGE, payload:{channelCount:parseInt(e.target.value)}})} />
+              // defaultValue={channelCount}
+              onChange = {(e) => auxiliaryInformationDispatch({type:ACTIONS.CHANGE, payload:{channelCount:parseInt(e.target.value),info:auxiliaryInformation,}})} />
         </div>
         {/* <InputDropdown data = {unitCountData}/> */}
         <div className=""> 
@@ -54,7 +42,7 @@ export default function HeaderChannels() {
               size="small"
               color="secondary"
               
-              onChange = {(e) => auxiliaryInformationDispatch({type:ACTIONS.CHANGE, payload:{virtual:parseInt(e.target.value)}})}  /> 
+              onChange = {(e) => auxiliaryInformationDispatch({type:ACTIONS.CHANGE, payload:{virtual:parseInt(e.target.value),info:auxiliaryInformation}})}  /> 
         </div>
         <div className=""> 
         <TextField id="filled-basic" 
@@ -67,7 +55,7 @@ export default function HeaderChannels() {
               onChange = {(e) => auxiliaryInformationDispatch({type:ACTIONS.CHANGE, payload:{physical:parseInt(e.target.value)}})}
               /> 
         </div>
-        <div className=""> 
+        {/* <div className=""> 
         <TextField id="filled-basic" 
               label="TSID" 
               variant="filled" 
@@ -78,7 +66,7 @@ export default function HeaderChannels() {
               onChange = {(e) => auxiliaryInformationDispatch({type:ACTIONS.CHANGE, payload:{tsid:(e.target.value)}})}
 
               /> 
-        </div>
+        </div> */}
                                   
         <div>
             <button className="btn-secondary header__apply-btn " onClick={() => loadOrCreateChannels()}><FaCheck /> APPLY </button>

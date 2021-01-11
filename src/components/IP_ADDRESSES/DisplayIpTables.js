@@ -1,7 +1,7 @@
 import React, { useContext } from "react";
 import { GlobalContext } from "../App";
 import DisplayIpData from "./DisplayIpData";
-import { ACTIONS } from "../App";
+import { ACTIONS } from '../DEFAULTS/Defaults'
 import {EditIcon,SaveIcon, SaveAllIcon } from "../DEFAULTS/ButtonIcons";
 
 
@@ -15,7 +15,7 @@ export default function IpDisplay() {
   } = useContext(GlobalContext);
 
   const { subnet, gateway, dns1, dns2, ntp } = auxiliaryInformation.ipAuxiliary;
-  console.log(auxiliaryInformation.ipAuxiliary);
+
 
   const ipData = ipAddresses.map((ipAddress) => {
     return <DisplayIpData key={ipAddress.id} {...ipAddress} />;
@@ -64,7 +64,9 @@ export default function IpDisplay() {
                 {/* <th className="display__header-normal">PORT</th> */}
               </tr>
             </thead>
+            <tbody>
             {ipData}
+            </tbody>
           </table>
           </div>
           <div>
@@ -86,8 +88,8 @@ export default function IpDisplay() {
               </thead>
 
               {!ipAuxiliary.selected && (
-                <tbody className="display__channel-data">
-                  <tr>
+                <tbody>
+                  <tr className="display__channel-data">
                     <td
                       onClick={(e) => updateIpAuxiliary({ selected: true })}
                       id="edit-column"
@@ -114,8 +116,8 @@ export default function IpDisplay() {
                 </tbody>
               )}
               {ipAuxiliary.selected && (
-                <tbody className="display__channel-data selected">
-                  <tr>
+                <tbody>
+                  <tr className="display__channel-data selected">
                     <td
                       onClick={(e) => updateIpAuxiliary({ selected: false })}
                       id="edit-column-selected"
@@ -127,7 +129,7 @@ export default function IpDisplay() {
                       <input
                         type="text"
                         id="subnet"
-                        placeholder={subnet}
+                        defaultValue={subnet}
                         onChange={(e) =>
                           updateIpAuxiliary({ subnet: e.target.value })
                         }
@@ -137,7 +139,7 @@ export default function IpDisplay() {
                       <input
                         type="text"
                         id="gateway"
-                        placeholder={gateway}
+                        defaultValue={gateway}
                         onChange={(e) =>
                           updateIpAuxiliary({ gateway: e.target.value })
                         }
@@ -147,7 +149,7 @@ export default function IpDisplay() {
                       <input
                         type="text"
                         id="dns1"
-                        placeholder={dns1}
+                        defaultValue={dns1}
                         onChange={(e) =>
                           updateIpAuxiliary({ dns1: e.target.value })
                         }
@@ -157,7 +159,7 @@ export default function IpDisplay() {
                       <input
                         type="text"
                         id="dns2"
-                        placeholder={dns2}
+                        defaultValue={dns2}
                         onChange={(e) =>
                           updateIpAuxiliary({ dns2: e.target.value })
                         }
@@ -167,7 +169,7 @@ export default function IpDisplay() {
                       <input
                         type="text"
                         id="ntp"
-                        placeholder={ntp}
+                        defaultValue={ntp}
                         onChange={(e) =>
                           updateIpAuxiliary({ ntp: e.target.value })
                         }

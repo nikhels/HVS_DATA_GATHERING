@@ -1,5 +1,6 @@
 import React,{ useContext } from 'react'
-import { GlobalContext, NAVIGATION } from '../App'
+import { GlobalContext} from '../App'
+import { NAVIGATION } from '../DEFAULTS/Defaults'
 
 export default function Navigation() {
   const {

@@ -1,10 +1,11 @@
 import React, { useContext } from "react";
-import { GlobalContext, NAVIGATION, ACTIONS } from "../App";
+import { GlobalContext } from "../App";
+import {NAVIGATION, ACTIONS } from '../DEFAULTS/Defaults'
 // import { GlobalContext } from './App'
 import DisplayChannelTables from "../CHANNELS/DisplayChannelTables";
 import DisplayIpTables from "../IP_ADDRESSES/DisplayIpTables";
 import DisplayHeader from "./DisplayHeader";
-import DisplayPsip from "../IP_ADDRESSES/DisplayPsip";
+import DisplayPsip from "../PSIP/DisplayPsip";
 import { FiEdit } from "react-icons/fi";
 import { FaChevronCircleRight } from "react-icons/fa";
 import { HiPlus, HiX } from "react-icons/hi";

@@ -2,7 +2,7 @@ import React, { useContext } from "react";
 // import { FiEdit } from "react-icons/fi";
 import { GlobalContext } from "../App";
 // import IpInputField from './IpInputField'
-import { ACTIONS } from "../App";
+import { ACTIONS } from '../DEFAULTS/Defaults'
 // import { FaCheckCircle } from "react-icons/fa";
 
 // import { RiEditBoxFill } from "react-icons/ri";
@@ -20,6 +20,8 @@ export default function IpDisplayList(ipAddress) {
     ipAddressesEditCount,
     ipAddresses,
     setIpAddressEditToggle,
+    auxiliaryInformation,
+    ipAddressesCount 
   } = useContext(GlobalContext);
 
   function handleChanges(changes) {
@@ -33,16 +35,16 @@ export default function IpDisplayList(ipAddress) {
       setIpAddressesEditCount(ipAddressesEditCount - 1);
     }
     ipAddressesDispatch({
-      type: ACTIONS.CHANGE,
-      payload: { id: ipAddress.id, ipAddress: { ...ipAddress, ...changes } },
+      type: ACTIONS.CHANGE,info:auxiliaryInformation,count:ipAddressesCount,
+      payload: { id: ipAddress.id, ipAddress: { ...ipAddress, ...changes }},
     });
   }
 
   return (
     <>
       {!ipAddress.selected && (
-        <tbody className="display__channel-data">
-          <tr>
+        
+          <tr className="display__channel-data">
             <td
               onClick={() => handleChanges({ selected: true })}
               id="edit-column"
@@ -53,12 +55,12 @@ export default function IpDisplayList(ipAddress) {
             <td className="display__text-box large">{name}</td>
             <td className="display__text-box large">{ip}</td>
           </tr>
-        </tbody>
+
       )}
 
       {ipAddress.selected && (
-        <tbody className="display__channel-data selected">
-          <tr>
+
+          <tr className="display__channel-data selected">
             <td
               onClick={() => handleChanges({ selected: false })}
               id="edit-column-selected"
@@ -70,7 +72,7 @@ export default function IpDisplayList(ipAddress) {
               <input
                 type="text"
                 id="name"
-                placeholder={name}
+                defaultValue={name}
                 onChange={(e) => handleChanges({ name: e.target.value })}
               />
             </td>
@@ -78,7 +80,7 @@ export default function IpDisplayList(ipAddress) {
               <input
                 type="text"
                 id="ip-address"
-                placeholder={ip}
+                defaultValue={ip}
                 onChange={(e) => handleChanges({ ip: e.target.value })}
               />
             </td>
@@ -104,7 +106,7 @@ export default function IpDisplayList(ipAddress) {
       <td className="display__text-box small">N/A</td>}  
        */}
           </tr>
-        </tbody>
+
       )}
     </>
   );

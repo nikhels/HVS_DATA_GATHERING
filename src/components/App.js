@@ -8,31 +8,10 @@ import Navigation from "./NAVIGATION/Navigation";
 import Submit from "./NAVIGATION/Submit";
 import { useReactToPrint } from "react-to-print";
 import { ComponentToPrint } from "./ComponentToPrint";
-// import HeaderHome from './NAVIGATION/HeaderHome'
+import { UpdateChannels, UpdateIpAddresses } from "./DEFAULTS/Reducers";
 import Axios from "axios";
-
-import {
-  ChannelConstructor,
-  IpAddressConstructor,
-} from "./DEFAULTS/Constructors";
-
-export const ACTIONS = {
-  EDIT_ALL_START: "edit-all-start",
-  EDIT_ALL_STOP: "edit-all-stop",
-  DEFAULT: "default",
-  CHANGE: "change",
-  ADD: "add",
-  REMOVE: "remove",
-  AUX: "auxiliary",
-  UPDATE_COUNT: "update-count",
-  LOAD: "load",
-};
-export const NAVIGATION = {
-  EQUIPMENT: "equipment",
-  CHANNELS: "channels",
-  IPADDRESSES: "ip-addresses",
-  SUBMIT: "submit",
-};
+import { AuxiliaryDefaults } from "./DEFAULTS/Defaults";
+import { ACTIONS, NAVIGATION } from "./DEFAULTS/Defaults";
 
 const LOCAL_STORAGE_KEY_CHANNELS = "HVSParameterGathering.channels";
 const LOCAL_STORAGE_KEY_IPADDRESSES = "HVSParameterGathering.ip-addresses";
@@ -43,45 +22,6 @@ const LOCAL_STORAGE_KEY_AUXILIARY = "HVSParameterGathering.auxiliary";
 export const GlobalContext = React.createContext();
 
 function App() {
-  const psipDefaults = {
-    psip1Name: "Guidebuilder-1",
-    psip1Ip: "192.168.1.200",
-    psip1Subnet: "255.255.255.0",
-    psip1Gateway: "192.168.1.1",
-    psip1Port: "3000",
-    psip1Selected: false,
-    secondaryPsip: false,
-    psip2Name: "Guidebuilder-2",
-    psip2Ip: "",
-    psip2Subnet: "",
-    psip2Gateway: "",
-    psip2Port: "",
-    psip2Selected: false,
-    psipToggle: false,
-  };
-
-  const auxiliaryDefaults = {
-    tsid: "",
-    channelCount: 0,
-    callLetters: "XXXX",
-    ipAddressesCount: 0,
-    psip: "",
-    psipPort: "",
-    psipInformation: psipDefaults,
-    ipAuxiliary: {
-      subnet: "255.255.255.0",
-      gateway: "192.168.1.1",
-      dns1: "8.8.8.8",
-      dns2: "8.8.4.4",
-      ntp: "129.6.15.28",
-      selected:false,
-    },
-    notes: {
-      display:false,
-      content:""
-    }
-  };
-
   const initialChannelsState = localStorage.getItem(LOCAL_STORAGE_KEY_CHANNELS)
     ? JSON.parse(localStorage.getItem(LOCAL_STORAGE_KEY_CHANNELS))
     : [];
@@ -104,7 +44,7 @@ function App() {
     LOCAL_STORAGE_KEY_AUXILIARY
   )
     ? JSON.parse(localStorage.getItem(LOCAL_STORAGE_KEY_AUXILIARY))
-    : auxiliaryDefaults;
+    : AuxiliaryDefaults;
 
   const [auxiliaryInformation, auxiliaryInformationDispatch] = useReducer(
     updateAuxiliaryInformation,
@@ -120,11 +60,11 @@ function App() {
 
   const [ipAddressesCount, setIpAddressesCount] = useState(1);
   const [channels, channelDispatch] = useReducer(
-    updateChannels,
+    UpdateChannels,
     initialChannelsState
   );
   const [ipAddresses, ipAddressesDispatch] = useReducer(
-    updateIpAddresses,
+    UpdateIpAddresses,
     initialIpAddressesState
   );
 
@@ -144,10 +84,6 @@ function App() {
   const [existingParameters, setExistingParameters] = useState();
 
   // const [psipToggle,setPsipToggle]= useState()
-
-  // console.log(ipAddresses)
-  // console.log(ipAddressesCount)
-  // console.log(auxiliaryInformation)
 
   function submitParameters() {
     Axios.post("http://localhost:3001/create", {
@@ -210,12 +146,18 @@ function App() {
     if (editing === true) {
       setChannelEditToggle(true);
       setChannelEditCount(channelCount);
-      channelDispatch({ type: ACTIONS.EDIT_ALL_START });
+      channelDispatch({
+        type: ACTIONS.EDIT_ALL_START,
+        info: auxiliaryInformation,
+      });
     }
     if (editing === false) {
       setChannelEditToggle(false);
       setChannelEditCount(0);
-      channelDispatch({ type: ACTIONS.EDIT_ALL_STOP });
+      channelDispatch({
+        type: ACTIONS.EDIT_ALL_STOP,
+        info: auxiliaryInformation,
+      });
     }
   }
   function handleIpAddressesEditToggle(editing) {
@@ -223,30 +165,37 @@ function App() {
     if (editing === true) {
       setIpAddressEditToggle(true);
       setIpAddressesEditCount(ipAddressesCount);
-      ipAddressesDispatch({ type: ACTIONS.EDIT_ALL_START });
+      ipAddressesDispatch({
+        type: ACTIONS.EDIT_ALL_START,
+        info: auxiliaryInformation,
+        count: ipAddressesCount,
+      });
     }
     if (editing === false) {
       setIpAddressEditToggle(false);
       setIpAddressesEditCount(0);
-      ipAddressesDispatch({ type: ACTIONS.EDIT_ALL_STOP });
+      ipAddressesDispatch({
+        type: ACTIONS.EDIT_ALL_STOP,
+        info: auxiliaryInformation,
+      });
     }
   }
   function loadOrCreateChannels() {
     const { channelCount } = auxiliaryInformation;
     if (channels.length === channelCount) {
       channelDispatch({
-        type: ACTIONS.LOAD,
-        payload: { channels: initialChannelsState },
+        type: ACTIONS.LOAD,info: auxiliaryInformation,
+        payload: { channels: initialChannelsState,  },
       });
     }
     if (channels.length !== 0 && channels.length < channelCount) {
-      channelDispatch({ type: ACTIONS.ADD });
+      channelDispatch({ type: ACTIONS.ADD, info: auxiliaryInformation });
     }
     if (channels.length !== 0 && channels.length > channelCount) {
-      channelDispatch({ type: ACTIONS.REMOVE });
+      channelDispatch({ type: ACTIONS.REMOVE, info: auxiliaryInformation });
     }
     if (channels.length === 0) {
-      channelDispatch({ type: ACTIONS.DEFAULT });
+      channelDispatch({ type: ACTIONS.DEFAULT, info: auxiliaryInformation });
     }
     // handleChannelEditToggle(true)
   }
@@ -255,20 +204,33 @@ function App() {
     if (ipAddresses.length === ipAddressesCount) {
       ipAddressesDispatch({
         type: ACTIONS.LOAD,
+        info: auxiliaryInformation,
+        count: ipAddressesCount,
         payload: { ipAddresses: initialIpAddressesState },
       });
     }
     if (ipAddresses.length !== 0 && ipAddresses.length < ipAddressesCount) {
       for (let x = ipAddresses.length + 1; x <= ipAddressesCount; x++) {
-        console.log(ipAddresses);
-        ipAddressesDispatch({ type: ACTIONS.ADD });
+        ipAddressesDispatch({
+          type: ACTIONS.ADD,
+          info: auxiliaryInformation,
+          count: ipAddressesCount,
+        });
       }
     }
     if (ipAddresses.length !== 0 && ipAddresses.length > ipAddressesCount) {
-      ipAddressesDispatch({ type: ACTIONS.REMOVE });
+      ipAddressesDispatch({
+        type: ACTIONS.REMOVE,
+        info: auxiliaryInformation,
+        count: ipAddressesCount,
+      });
     }
     if (ipAddresses.length === 0) {
-      ipAddressesDispatch({ type: ACTIONS.DEFAULT });
+      ipAddressesDispatch({
+        type: ACTIONS.DEFAULT,
+        info: auxiliaryInformation,
+        count: ipAddressesCount,
+      });
     }
   }
 
@@ -285,22 +247,11 @@ function App() {
       if (e === "Downstream") {
         updatePsipInformation({ psip: e, psipToggle: false });
         setIpAddressesCount(2);
-        // auxiliaryInformationDispatch({
-        //   type: ACTIONS.CHANGE,
-        //   payload: { ipAddressesCount: 2},
-        // });
-        // setPsipToggle(false)
       }
       if (e === "Internal Spooling") {
         updatePsipInformation({ psip: e, psipToggle: true });
         setIpAddressesCount(3);
-        // auxiliaryInformationDispatch({
-        //   type: ACTIONS.CHANGE,
-        //   payload: { ipAddressesCount: 3},
-        // });
       }
-
-      // setPsipToggle(true)
     } else {
       updatePsipInformation({ psip: e, ipAddressesCount: 1 });
     }
@@ -339,110 +290,46 @@ function App() {
     localStorage.setItem(LOCAL_STORAGE_KEY_IPADDRESSES, JSON.stringify([]));
     localStorage.setItem(LOCAL_STORAGE_KEY_EQUIPMENTTYPE, JSON.stringify(""));
     localStorage.setItem(LOCAL_STORAGE_KEY_EQUIPMENT, JSON.stringify(""));
-    localStorage.setItem(LOCAL_STORAGE_KEY_AUXILIARY, JSON.stringify(auxiliaryDefaults));
+    localStorage.setItem(
+      LOCAL_STORAGE_KEY_AUXILIARY,
+      JSON.stringify(AuxiliaryDefaults)
+    );
   }
 
-  function updateChannels(channels, action) {
-    const { channelCount, virtual, physical } = auxiliaryInformation;
-    switch (action.type) {
-      case ACTIONS.LOAD:
-        return (channels = action.payload.channels);
-      case ACTIONS.DEFAULT:
-        channels = [];
-        for (let x = 1; x <= channelCount; x++) {
-          channels = [
-            ...channels,
-            new ChannelConstructor(x, virtual, physical),
-          ];
-        }
-        return channels;
-      case ACTIONS.ADD:
-        for (let x = channels.length + 1; x <= channelCount; x++) {
-          const newChannels = [new ChannelConstructor(x, virtual, physical)];
-          channels = [...channels, ...newChannels];
-        }
-        return channels;
-      case ACTIONS.REMOVE:
-        const newArray = channels.slice(0, channelCount);
-        return newArray;
-      case ACTIONS.EDIT_ALL_START:
-        return channels.map((channel) => ({ ...channel, selected: true }));
-      case ACTIONS.EDIT_ALL_STOP:
-        return channels.map((channel) => ({ ...channel, selected: false }));
-      case ACTIONS.CHANGE:
-        const channelChanges = [...channels];
-        const index = channelChanges.findIndex(
-          (c) => c.id === action.payload.id
-        );
-        channelChanges[index] = action.payload.channel;
-        return (channels = channelChanges);
-      default:
-        return channels;
-    }
-  }
   function updateAuxiliaryInformation(auxiliaryInformation, action) {
     switch (action.type) {
       case ACTIONS.CHANGE:
         if (action.payload !== "") {
-          const updatedAuxiliaryInformation = {
-            ...auxiliaryInformation,
-            ...action.payload,
-          };
-          return (auxiliaryInformation = updatedAuxiliaryInformation);
+          if (action.id === "transport") {
+            const updatedAuxiliaryInformation = {
+              ...auxiliaryInformation,
+              transportInformation: {
+                ...auxiliaryInformation.transportInformation,
+                ...action.payload,
+              },
+            };
+            return (auxiliaryInformation = updatedAuxiliaryInformation);
+          }
+          if (action.id === "psip") {
+            const updatedAuxiliaryInformation = {
+              ...auxiliaryInformation,
+              psipInformation: {
+                ...auxiliaryInformation.psipInformation,
+                ...action.payload,
+              },
+            };
+            return (auxiliaryInformation = updatedAuxiliaryInformation);
+          } else {
+            const updatedAuxiliaryInformation = {
+              ...auxiliaryInformation,
+              ...action.payload,
+            };
+            return (auxiliaryInformation = updatedAuxiliaryInformation);
+          }
         }
         break;
       default:
         return auxiliaryInformation;
-    }
-  }
-  function updateIpAddresses(ipAddresses, action) {
-    // const { ipAddressesCount} = auxiliaryInformation;
-    const { psip } = auxiliaryInformation.psipInformation;
-
-    switch (action.type) {
-      case ACTIONS.LOAD:
-        return (ipAddresses = action.payload.ipAddresses);
-      case ACTIONS.DEFAULT:
-        for (let x = 1; x <= ipAddressesCount; x++) {
-          ipAddresses = [
-            ...ipAddresses,
-            new IpAddressConstructor(x, ipAddressesCount, psip),
-          ];
-        }
-        return ipAddresses;
-      case ACTIONS.CHANGE:
-        const ipAddressChanges = [...ipAddresses];
-        const index = ipAddressChanges.findIndex(
-          (c) => c.id === action.payload.id
-        );
-        ipAddressChanges[index] = action.payload.ipAddress;
-        return (ipAddresses = ipAddressChanges);
-      case ACTIONS.ADD:
-        const newIpAddresses = [
-          new IpAddressConstructor(
-            ipAddresses.length + 1,
-            ipAddressesCount,
-            psip
-          ),
-        ];
-        const addIpAddresses = [...ipAddresses, ...newIpAddresses];
-        return addIpAddresses;
-
-      case ACTIONS.REMOVE:
-        const newArray = ipAddresses.slice(0, ipAddressesCount);
-        return newArray;
-      case ACTIONS.EDIT_ALL_START:
-        return ipAddresses.map((ipAddress) => ({
-          ...ipAddress,
-          selected: true,
-        }));
-      case ACTIONS.EDIT_ALL_STOP:
-        return ipAddresses.map((ipAddress) => ({
-          ...ipAddress,
-          selected: false,
-        }));
-      default:
-        return ipAddresses;
     }
   }
 
