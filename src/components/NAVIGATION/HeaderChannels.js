@@ -7,9 +7,9 @@ import TextField from '@material-ui/core/TextField'
 import { FaCheck} from 'react-icons/fa'
 export default function HeaderChannels() {
   const {
-    auxiliaryInformation,
-    auxiliaryInformationDispatch,
-    // auxiliaryInformation,
+    // parameters,
+    parametersDispatch,
+    // parameters,
     loadOrCreateChannels
     
   } = useContext(GlobalContext)
@@ -30,7 +30,7 @@ export default function HeaderChannels() {
               size="small"
               color="secondary"
               // defaultValue={channelCount}
-              onChange = {(e) => auxiliaryInformationDispatch({type:ACTIONS.CHANGE, payload:{channelCount:parseInt(e.target.value),info:auxiliaryInformation,}})} />
+              onChange = {(e) => parametersDispatch({type:ACTIONS.CHANGE,id:"channelInformation", payload:{channelCount:parseInt(e.target.value)}})} />
         </div>
         {/* <InputDropdown data = {unitCountData}/> */}
         <div className=""> 
@@ -42,7 +42,7 @@ export default function HeaderChannels() {
               size="small"
               color="secondary"
               
-              onChange = {(e) => auxiliaryInformationDispatch({type:ACTIONS.CHANGE, payload:{virtual:parseInt(e.target.value),info:auxiliaryInformation}})}  /> 
+              onChange = {(e) => parametersDispatch({type:ACTIONS.CHANGE,id:"channelInformation", payload:{virtual:parseInt(e.target.value)}})}  /> 
         </div>
         <div className=""> 
         <TextField id="filled-basic" 
@@ -52,7 +52,7 @@ export default function HeaderChannels() {
               className="input__text-box small"
               size="small"
               color="secondary"
-              onChange = {(e) => auxiliaryInformationDispatch({type:ACTIONS.CHANGE, payload:{physical:parseInt(e.target.value)}})}
+              onChange = {(e) => parametersDispatch({type:ACTIONS.CHANGE,id:"channelInformation", payload:{physical:parseInt(e.target.value)}})}
               /> 
         </div>
         {/* <div className=""> 
@@ -63,7 +63,7 @@ export default function HeaderChannels() {
               className="input__text-box small"
               size="small"
               color="secondary"
-              onChange = {(e) => auxiliaryInformationDispatch({type:ACTIONS.CHANGE, payload:{tsid:(e.target.value)}})}
+              onChange = {(e) => parametersDispatch({type:ACTIONS.CHANGE, payload:{tsid:(e.target.value)}})}
 
               /> 
         </div> */}

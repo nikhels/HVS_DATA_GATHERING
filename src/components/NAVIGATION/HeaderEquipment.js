@@ -10,15 +10,19 @@ export default function HeaderEquipment() {
   const {
     setEquipmentTypeSelection,
     setEquipmentSelection,
-    auxiliaryInformationDispatch,
+    parametersDispatch,
     equipmentSelection,
     equipmentTypeSelection,
     navigationDispatch,
     resetEquipmentSheet,
+    setExistingStationData,
+    handleLoadExistingParameters
   } = useContext(GlobalContext);
 
   const [newEquipmentToggle, setNewEquipmentToggle] = useState();
   const [existingEquipmentToggle, setExistingEquipmentToggle] = useState();
+  // const [existingStationData, setExistingStationData] = useState();
+
 
   function handleSetNewEquipmentToggle() {
     // window.localStorage.clear();
@@ -44,9 +48,7 @@ export default function HeaderEquipment() {
     navigationDispatch({ type: NAVIGATION.CHANNELS });
   }
 
-  // function handleExistingEquipmentSelection(e){
-  //   setExistingParameters(e)
-  // }
+
 
   const equipmentTypeSelectionData = {
     label: "Equipment Type",
@@ -90,7 +92,7 @@ export default function HeaderEquipment() {
           </div>
           <div className="header__input-container four-column">
             {!newEquipmentToggle && existingEquipmentToggle && (
-              <StationSelection />
+              <StationSelection setExistingStationData = {setExistingStationData}/>
             )}
 
             {newEquipmentToggle && !existingEquipmentToggle && (
@@ -104,7 +106,7 @@ export default function HeaderEquipment() {
                   size="small"
                   color="secondary"
                   onChange={(e) =>
-                    auxiliaryInformationDispatch({
+                    parametersDispatch({
                       type: ACTIONS.CHANGE,
                       payload: { callLetters: e.target.value },
                     })
@@ -143,7 +145,7 @@ export default function HeaderEquipment() {
             {existingEquipmentToggle && (
               <button
                 className="btn-secondary header__apply-btn"
-                onClick={() => handleEquipmentApply()}
+                onClick={() => handleLoadExistingParameters()}
               >
                 <FaCheck /> APPLY{" "}
               </button>

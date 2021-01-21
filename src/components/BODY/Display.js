@@ -2,8 +2,8 @@ import React, { useContext } from "react";
 import { GlobalContext } from "../App";
 import {NAVIGATION, ACTIONS } from '../DEFAULTS/Defaults'
 // import { GlobalContext } from './App'
-import DisplayChannelTables from "../CHANNELS/DisplayChannelTables";
-import DisplayIpTables from "../IP_ADDRESSES/DisplayIpTables";
+import DisplayChannels from "../CHANNELS/DisplayChannels";
+import DisplayIpAddresses from "../IP_ADDRESSES/DisplayIpAddresses";
 import DisplayHeader from "./DisplayHeader";
 import DisplayPsip from "../PSIP/DisplayPsip";
 import { FiEdit } from "react-icons/fi";
@@ -23,15 +23,15 @@ export default function Display() {
     navigationDispatch,
     channelEditCount,
     ipAddressesEditCount,
-    auxiliaryInformation,
-    auxiliaryInformationDispatch,
+    parameters,
+    parametersDispatch,
   } = useContext(GlobalContext);
 
-  const { notes } = auxiliaryInformation;
+  const { notes } = parameters;
 
   function handleChanges(e) {
-    const psipChanges = { ...auxiliaryInformation.psipInformation, ...e };
-    auxiliaryInformationDispatch({
+    const psipChanges = { ...parameters.psipInformation, ...e };
+    parametersDispatch({
       type: ACTIONS.CHANGE,
       payload: { psipInformation: psipChanges },
     });
@@ -39,7 +39,7 @@ export default function Display() {
 
   function updateNoteAuxiliary(e) {
     const updatedNoteAuxiliary = { ...notes, ...e };
-    auxiliaryInformationDispatch({
+    parametersDispatch({
       type: ACTIONS.CHANGE,
       payload: { notes: updatedNoteAuxiliary },
     });
@@ -125,7 +125,7 @@ export default function Display() {
             </button>
           </div> */}
           <div>
-            {!auxiliaryInformation.psipInformation.psipToggle && (
+            {!parameters.psipInformation.psipToggle && (
               <button
                 onClick={() => handleChanges({ psipToggle: true })}
                 className="btn-secondary"
@@ -135,7 +135,7 @@ export default function Display() {
               </button>
             )}
 
-            {auxiliaryInformation.psipInformation.psipToggle && (
+            {parameters.psipInformation.psipToggle && (
               <button
                 onClick={() => handleChanges({ psipToggle: false })}
                 className="btn-secondary"
@@ -170,10 +170,10 @@ export default function Display() {
             {" "}
             <DisplayHeader />
             {/* <DisplayHeader /> */}
-            {ipAddresses.length > 0 && <DisplayIpTables />}
-            {auxiliaryInformation.psipInformation.psipToggle && <DisplayPsip />}
+            {ipAddresses.length > 0 && <DisplayIpAddresses />}
+            {parameters.psipInformation.psipToggle && <DisplayPsip />}
             {/* <DisplayPsip /> */}
-            {channels.length > 0 && <DisplayChannelTables />}
+            {channels.length > 0 && <DisplayChannels />}
           </div>
         )}
         {!notes.display && channels.length > 0 && (

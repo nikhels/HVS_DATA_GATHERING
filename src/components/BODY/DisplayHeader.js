@@ -5,10 +5,10 @@ export default function DisplayHeader() {
   const {
     equipmentTypeSelection,
     equipmentSelection,
-    auxiliaryInformation,
+    parameters,
   } = useContext(GlobalContext);
 
-  const { callLetters } = auxiliaryInformation;
+  const { callLetters } = parameters;
 
   return (
     <>
@@ -22,7 +22,7 @@ export default function DisplayHeader() {
           1-800-332-7088
         </div>
       </div>
-      {auxiliaryInformation.tsid &&
+      {parameters.tsid &&
       <div className="display__line-break">
         {/* <div className="display__sheet-sub-header">TSID: {tsid}</div> */}
       </div>}

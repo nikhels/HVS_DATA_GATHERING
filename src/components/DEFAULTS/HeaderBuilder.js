@@ -1,35 +1,26 @@
-import React, { useContext } from "react";
-import { GlobalContext} from "../App";
+import React from "react";
+// import { GlobalContext} from "../App";
 import { SaveAllIcon, PlusIcon } from "../DEFAULTS/ButtonIcons";
 import { v4 as uuidv4 } from "uuid";
-// import { UpdateAuxiliary } from '../DEFAULTS/UpdateAuxiliary'
+// import { UpdateReducer } from '../DEFAULTS/UpdateReducer'
 
-export function HeaderBuilder({setCount, headerData }) {
-  const { auxiliaryInformation } = useContext(
-    GlobalContext
-  );
 
-  const { transport1Selected } = auxiliaryInformation.transportInformation;
-
-  function handleChanges(event){
-    // location.map((item) => {
-    //   UpdateAuxiliary(event,functionData,changeFunction) 
-    };
-   
-
+export function HeaderBuilder({functionData, headerData }) {
+console.log(functionData)
 
   return (
     <>
       {headerData.map(({ size="large", data, type }) => {
         
         if (type === "edit") {
-          if (!transport1Selected) {
+          const {editAll,editing} = functionData
+          if (!editing) {
             return (
               <th
                 key={uuidv4()}
                 id="edit-column-header"
                 className="display__header-normal edit"
-                onClick={() => handleChanges({ selected: true })}
+                onClick={() => editAll(true)}
               >
                 <div className="display__edit-all-text">EDIT ALL</div>
               </th>
@@ -38,9 +29,9 @@ export function HeaderBuilder({setCount, headerData }) {
             return (
               <th
                 key={uuidv4()}
-                className="display__header-normal edit selected"
                 id="edit-column-header-selected"
-                onClick={() => handleChanges({ selected: false })}
+                className="display__header-normal edit selected"
+                onClick={() => editAll(false)}
               >
                 <SaveAllIcon />
               </th>
@@ -48,12 +39,13 @@ export function HeaderBuilder({setCount, headerData }) {
           }
         }
         if (type === "add") {
+          const {addOrRemove} = functionData
           return (
             <th
               key={uuidv4()}
               className="display__header-normal edit"
               id="edit-column-header"
-              onClick={() => setCount("add")}
+              onClick={() => addOrRemove("add")}
             >
               <PlusIcon />
             </th>

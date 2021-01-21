@@ -5,56 +5,56 @@ import { HeaderBuilder } from "../DEFAULTS/HeaderBuilder";
 import {
   TransportATSC1Header,
   TransportATSC1,
-} from "../TRANSPORTS/TransportATSC1";
+} from "./TransportATSC1";
 import { CloseIcon } from "../DEFAULTS/ButtonIcons";
-import { UpdateAuxiliary } from "../DEFAULTS/UpdateAuxiliary";
+import { UpdateReducer } from "../DEFAULTS/UpdateReducer";
 
 export default function IpOutput() {
-  const { auxiliaryInformation, auxiliaryInformationDispatch } = useContext(
+  const { parameters, parametersDispatch } = useContext(
     GlobalContext
   );
 
   const {
     transportInformation: { info, TS1, TS2 },
-  } = auxiliaryInformation;
+  } = parameters;
 
   const updateTSdata = {
     location: info,
     payload: "info",
-    id: "transport",
+    id: "transportInformation",
   };
   const updateTS1data = {
     location: TS1,
     payload: "TS1",
-    id: "transport",
+    id: "transportInformation",
   };
   const updateTS2data = {
     location: TS2,
     payload: "TS2",
-    id: "transport",
+    id: "transportInformation",
   };
 
   function transportAddRemove(toggle) {
     switch (toggle) {
       case "add":
         if (info.count < 2) {
-          UpdateAuxiliary(
+          UpdateReducer(
             { count: info.count + 1 },
             updateTSdata,
-            auxiliaryInformationDispatch
+            parametersDispatch
           );
-          UpdateAuxiliary(
+          UpdateReducer(
             { selected: true },
             updateTS2data,
-            auxiliaryInformationDispatch
+            parametersDispatch
           );
         }
         break;
       case "remove":
-        UpdateAuxiliary(
+        UpdateReducer(
           { count: info.count - 1 },
           updateTSdata,
-          auxiliaryInformationDispatch
+          parametersDispatch
         );
         break;
       default:
@@ -70,7 +70,7 @@ export default function IpOutput() {
             <tr>
               <HeaderBuilder
                 headerData={TransportATSC1Header}
-                setCount={transportAddRemove}
+                functionData={{addOrRemove:transportAddRemove}}
                 count={info.count}
               />
             </tr>
@@ -80,16 +80,16 @@ export default function IpOutput() {
               rowData={TransportATSC1(TS1)}
               selected={TS1.selected}
               updateData={updateTS1data}
-              changeFunction={auxiliaryInformationDispatch}
-              updateFunction={UpdateAuxiliary}
+              changeFunction={parametersDispatch}
+              updateFunction={UpdateReducer}
             />
             {info.count > 1 && (
               <RowBuilder
                 rowData={TransportATSC1(TS2)}
                 selected={TS2.selected}
                 updateData={updateTS2data}
-                changeFunction={auxiliaryInformationDispatch}
-                updateFunction={UpdateAuxiliary}
+                changeFunction={parametersDispatch}
+                updateFunction={UpdateReducer}
               />
             )}
           </tbody>

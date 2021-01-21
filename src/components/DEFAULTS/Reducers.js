@@ -32,7 +32,11 @@ export function UpdateChannels(channels, action) {
       return channels.map((channel) => ({ ...channel, selected: false }));
     case ACTIONS.CHANGE:
       const channelChanges = [...channels];
-      const index = channelChanges.findIndex((c) => c.id === action.payload.id);
+
+      const index = channelChanges.findIndex(
+        (c) => c.id === action.payload.key
+      );
+      // console.log("changes " + action.payload.channel)
       channelChanges[index] = action.payload.channel;
       return (channels = channelChanges);
     default:
@@ -60,7 +64,7 @@ export function UpdateIpAddresses(ipAddresses, action) {
     case ACTIONS.CHANGE:
       const ipAddressChanges = [...ipAddresses];
       const index = ipAddressChanges.findIndex(
-        (c) => c.id === action.payload.id
+        (c) => c.id === action.payload.key
       );
       ipAddressChanges[index] = action.payload.ipAddress;
       return (ipAddresses = ipAddressChanges);
@@ -86,5 +90,54 @@ export function UpdateIpAddresses(ipAddresses, action) {
       }));
     default:
       return ipAddresses;
+  }
+}
+
+export function UpdateParameters(parameters, action) {
+  const { virtual, physical } = parameters.channelInformation
+  switch (action.type) {
+    case ACTIONS.LOAD:
+      return (parameters = action.payload.auxiliary);
+    case ACTIONS.CHANGE:
+      if (action.id){
+      const updatedAuxiliaryInformation = {
+          ...parameters,
+          [action.id]: {
+            ...parameters[action.id],
+            ...action.payload,
+          },
+        };
+        return (parameters = updatedAuxiliaryInformation);
+      }
+      else{
+        const updatedAuxiliaryInformation = {
+          ...parameters,
+          ...action.payload,
+        };
+        return (parameters = updatedAuxiliaryInformation);
+      }
+      // if (action.id === "channelsInformation") {
+      //   const channelChanges = [...parameters.channelsInformation.channels];
+
+      //   const index = channelChanges.findIndex(
+      //     (c) => c.id === action.payload.key
+      //   );
+      //   channelChanges[index] = action.payload.channel;
+      //   return (parameters.channelsInformation.channels = channelChanges);
+      // } else {
+      //   return console.log("reducer broke");
+      // }
+      case ACTIONS.DEFAULT:  
+      //  parameters.channels = [];
+        for (let x = 1; x <= parameters.channelInformation.channelCount; x++) {
+          // console.log(parameters)
+          parameters.channels  = [...parameters.channels ,
+             new ChannelConstructor(x, virtual, physical)];
+        }
+         return parameters;
+        
+
+    default:
+      return parameters;
   }
 }

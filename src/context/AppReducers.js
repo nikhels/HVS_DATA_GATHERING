@@ -1,7 +1,7 @@
 // import ACTIONS from '..components/App'
 
 // export default function updateChannels(channels,action){ 
-//   const {channelCount,virtual,physical}= auxiliaryInformation 
+//   const {channelCount,virtual,physical}= parameters 
 //   switch (action.type){
 //     case ACTIONS.LOAD:
 

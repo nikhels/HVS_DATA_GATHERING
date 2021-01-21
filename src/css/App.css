@@ -38,6 +38,9 @@ textarea {
 }
 table {
   border-collapse: collapse;
+  table-layout:auto;
+  width:100%;
+  /* max-width:1383px; */
 }
 
 

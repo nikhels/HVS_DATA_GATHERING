@@ -42,10 +42,10 @@ const PsipDefaults = {
   export const AuxiliaryDefaults = {
       tsid: "",
       channelCount: 0,
+      channelInformation:{virtual:"",physical:"",channelCount:0},
       callLetters: "XXXX",
       ipAddressesCount: 0,
       psip: "",
-      psipPort: "",
       psipInformation: {info:{count:1},PSIP1:PsipDefaults,PSIP2:PsipDefaults},
       transportInformation:{info:{count:1},TS1:TransportDefaults,TS2:TransportDefaults,TS3:TransportDefaults},
       ipAuxiliary: {

@@ -8,10 +8,11 @@ import Navigation from "./NAVIGATION/Navigation";
 import Submit from "./NAVIGATION/Submit";
 import { useReactToPrint } from "react-to-print";
 import { ComponentToPrint } from "./ComponentToPrint";
-import { UpdateChannels, UpdateIpAddresses } from "./DEFAULTS/Reducers";
+import { UpdateChannels, UpdateIpAddresses, UpdateParameters  } from "./DEFAULTS/Reducers";
 import Axios from "axios";
 import { AuxiliaryDefaults } from "./DEFAULTS/Defaults";
 import { ACTIONS, NAVIGATION } from "./DEFAULTS/Defaults";
+// import { UpdateReducer } from "./DEFAULTS/UpdateReducer";
 
 const LOCAL_STORAGE_KEY_CHANNELS = "HVSParameterGathering.channels";
 const LOCAL_STORAGE_KEY_IPADDRESSES = "HVSParameterGathering.ip-addresses";
@@ -46,8 +47,8 @@ function App() {
     ? JSON.parse(localStorage.getItem(LOCAL_STORAGE_KEY_AUXILIARY))
     : AuxiliaryDefaults;
 
-  const [auxiliaryInformation, auxiliaryInformationDispatch] = useReducer(
-    updateAuxiliaryInformation,
+  const [parameters, parametersDispatch] = useReducer(
+    UpdateParameters,
     initialAuxiliaryInformationState
   );
 
@@ -81,23 +82,43 @@ function App() {
   const [ipAddressEditToggle, setIpAddressEditToggle] = useState();
   const [ipAddressesEditCount, setIpAddressesEditCount] = useState(0);
 
-  const [existingParameters, setExistingParameters] = useState();
-
-  // const [psipToggle,setPsipToggle]= useState()
+  // const [existingParameters, setExistingParameters] = useState();
+  const [existingStationData, setExistingStationData] = useState();
 
   function submitParameters() {
-    Axios.post("http://localhost:3001/create", {
-      callLetters: auxiliaryInformation.callLetters,
-      equipment: equipmentSelection,
-      channels: localStorage.getItem(LOCAL_STORAGE_KEY_CHANNELS),
-      auxiliary: localStorage.getItem(LOCAL_STORAGE_KEY_AUXILIARY),
-    }).then(() => console.log("Success"));
+    // console.log(existingStationData._id)
+    if (existingStationData) {
+      Axios.put("http://localhost:3001/update", {
+        id: existingStationData._id,
+        callLetters: parameters.callLetters,
+        equipment: equipmentSelection,
+        channels: localStorage.getItem(LOCAL_STORAGE_KEY_CHANNELS),
+        auxiliary: localStorage.getItem(LOCAL_STORAGE_KEY_AUXILIARY),
+      }).then(() => console.log("updated Successful"));
+    } else {
+      Axios.put("http://localhost:3001/create", {
+        callLetters: parameters.callLetters,
+        equipment: equipmentSelection,
+        channels: localStorage.getItem(LOCAL_STORAGE_KEY_CHANNELS),
+        auxiliary: localStorage.getItem(LOCAL_STORAGE_KEY_AUXILIARY),
+      }).then(() => console.log("Success"));
+    }
   }
-  const getExisitingParameters = () => {
-    Axios.get("http://localhost:3001/existing").then((response) => {
-      setExistingParameters(response.data);
+
+  function handleLoadExistingParameters() {
+    resetEquipmentSheet();
+    channelDispatch({
+      type: ACTIONS.LOAD,
+      info: parameters,
+      payload: { channels: JSON.parse(existingStationData.channels) },
     });
-  };
+    setEquipmentSelection(existingStationData.equipment);
+
+    parametersDispatch({
+      type: ACTIONS.LOAD,
+      payload: { auxiliary: JSON.parse(existingStationData.auxiliary) },
+    });
+  }
 
   function toggleNavigation(navigation, action) {
     switch (action.type) {
@@ -142,13 +163,13 @@ function App() {
     }
   }
   function handleChannelEditToggle(editing) {
-    const { channelCount } = auxiliaryInformation;
+    const { channelCount } = parameters;
     if (editing === true) {
       setChannelEditToggle(true);
       setChannelEditCount(channelCount);
       channelDispatch({
         type: ACTIONS.EDIT_ALL_START,
-        info: auxiliaryInformation,
+        info: parameters,
       });
     }
     if (editing === false) {
@@ -156,18 +177,18 @@ function App() {
       setChannelEditCount(0);
       channelDispatch({
         type: ACTIONS.EDIT_ALL_STOP,
-        info: auxiliaryInformation,
+        info: parameters,
       });
     }
   }
   function handleIpAddressesEditToggle(editing) {
-    // const { ipAddressesCount } = auxiliaryInformation;
+    // const { ipAddressesCount } = parameters;
     if (editing === true) {
       setIpAddressEditToggle(true);
       setIpAddressesEditCount(ipAddressesCount);
       ipAddressesDispatch({
         type: ACTIONS.EDIT_ALL_START,
-        info: auxiliaryInformation,
+        info: parameters,
         count: ipAddressesCount,
       });
     }
@@ -176,35 +197,36 @@ function App() {
       setIpAddressesEditCount(0);
       ipAddressesDispatch({
         type: ACTIONS.EDIT_ALL_STOP,
-        info: auxiliaryInformation,
+        info: parameters,
       });
     }
   }
   function loadOrCreateChannels() {
-    const { channelCount } = auxiliaryInformation;
+    const { channelCount } = parameters.channelInformation;
     if (channels.length === channelCount) {
       channelDispatch({
-        type: ACTIONS.LOAD,info: auxiliaryInformation,
-        payload: { channels: initialChannelsState,  },
+        type: ACTIONS.LOAD,
+        info: parameters.channelInformation,
+        payload: { channels: initialChannelsState },
       });
     }
     if (channels.length !== 0 && channels.length < channelCount) {
-      channelDispatch({ type: ACTIONS.ADD, info: auxiliaryInformation });
+      channelDispatch({ type: ACTIONS.ADD, info: parameters.channelInformation });
     }
     if (channels.length !== 0 && channels.length > channelCount) {
-      channelDispatch({ type: ACTIONS.REMOVE, info: auxiliaryInformation });
+      channelDispatch({ type: ACTIONS.REMOVE, info: parameters.channelInformation});
     }
     if (channels.length === 0) {
-      channelDispatch({ type: ACTIONS.DEFAULT, info: auxiliaryInformation });
+      channelDispatch({ type: ACTIONS.DEFAULT, info: parameters.channelInformation });
     }
     // handleChannelEditToggle(true)
   }
   function loadOrCreateIpAddresses() {
-    // const { ipAddressesCount } = auxiliaryInformation;
+    // const { ipAddressesCount } = parameters;
     if (ipAddresses.length === ipAddressesCount) {
       ipAddressesDispatch({
         type: ACTIONS.LOAD,
-        info: auxiliaryInformation,
+        info: parameters,
         count: ipAddressesCount,
         payload: { ipAddresses: initialIpAddressesState },
       });
@@ -213,7 +235,7 @@ function App() {
       for (let x = ipAddresses.length + 1; x <= ipAddressesCount; x++) {
         ipAddressesDispatch({
           type: ACTIONS.ADD,
-          info: auxiliaryInformation,
+          info: parameters,
           count: ipAddressesCount,
         });
       }
@@ -221,22 +243,22 @@ function App() {
     if (ipAddresses.length !== 0 && ipAddresses.length > ipAddressesCount) {
       ipAddressesDispatch({
         type: ACTIONS.REMOVE,
-        info: auxiliaryInformation,
+        info: parameters,
         count: ipAddressesCount,
       });
     }
     if (ipAddresses.length === 0) {
       ipAddressesDispatch({
         type: ACTIONS.DEFAULT,
-        info: auxiliaryInformation,
+        info: parameters,
         count: ipAddressesCount,
       });
     }
   }
 
   function updatePsipInformation(e) {
-    const psipChanges = { ...auxiliaryInformation.psipInformation, ...e };
-    auxiliaryInformationDispatch({
+    const psipChanges = { ...parameters.psipInformation, ...e };
+    parametersDispatch({
       type: ACTIONS.CHANGE,
       payload: { psipInformation: psipChanges },
     });
@@ -281,9 +303,9 @@ function App() {
   useEffect(() => {
     localStorage.setItem(
       LOCAL_STORAGE_KEY_AUXILIARY,
-      JSON.stringify(auxiliaryInformation)
+      JSON.stringify(parameters)
     );
-  }, [auxiliaryInformation]);
+  }, [parameters]);
 
   function resetEquipmentSheet() {
     localStorage.setItem(LOCAL_STORAGE_KEY_CHANNELS, JSON.stringify([]));
@@ -296,42 +318,44 @@ function App() {
     );
   }
 
-  function updateAuxiliaryInformation(auxiliaryInformation, action) {
-    switch (action.type) {
-      case ACTIONS.CHANGE:
-        if (action.payload !== "") {
-          if (action.id === "transport") {
-            const updatedAuxiliaryInformation = {
-              ...auxiliaryInformation,
-              transportInformation: {
-                ...auxiliaryInformation.transportInformation,
-                ...action.payload,
-              },
-            };
-            return (auxiliaryInformation = updatedAuxiliaryInformation);
-          }
-          if (action.id === "psip") {
-            const updatedAuxiliaryInformation = {
-              ...auxiliaryInformation,
-              psipInformation: {
-                ...auxiliaryInformation.psipInformation,
-                ...action.payload,
-              },
-            };
-            return (auxiliaryInformation = updatedAuxiliaryInformation);
-          } else {
-            const updatedAuxiliaryInformation = {
-              ...auxiliaryInformation,
-              ...action.payload,
-            };
-            return (auxiliaryInformation = updatedAuxiliaryInformation);
-          }
-        }
-        break;
-      default:
-        return auxiliaryInformation;
-    }
-  }
+  // function UpdateParameters(parameters, action) {
+  //   switch (action.type) {
+  //     case ACTIONS.LOAD:
+  //       return (parameters = action.payload.auxiliary);
+  //     case ACTIONS.CHANGE:
+  //       if (action.payload !== "") {
+  //         if (action.id === "transport") {
+  //           const updatedAuxiliaryInformation = {
+  //             ...parameters,
+  //             transportInformation: {
+  //               ...parameters.transportInformation,
+  //               ...action.payload,
+  //             },
+  //           };
+  //           return (parameters = updatedAuxiliaryInformation);
+  //         }
+  //         if (action.id === "psip") {
+  //           const updatedAuxiliaryInformation = {
+  //             ...parameters,
+  //             psipInformation: {
+  //               ...parameters.psipInformation,
+  //               ...action.payload,
+  //             },
+  //           };
+  //           return (parameters = updatedAuxiliaryInformation);
+  //         } else {
+  //           const updatedAuxiliaryInformation = {
+  //             ...parameters,
+  //             ...action.payload,
+  //           };
+  //           return (parameters = updatedAuxiliaryInformation);
+  //         }
+  //       }
+  //       break;
+  //     default:
+  //       return parameters;
+  //   }
+  // }
 
   // CALLS PRINT LIBRARY AND REFERENCES DISPLAY COMPONENT
   const componentRef = useRef();
@@ -342,7 +366,7 @@ function App() {
   const globalContextValues = {
     channelDispatch,
     ipAddressesDispatch,
-    auxiliaryInformationDispatch,
+    parametersDispatch,
     navigationDispatch,
 
     setEquipmentTypeSelection,
@@ -361,14 +385,12 @@ function App() {
     handlePsipSourceSelection,
 
     submitParameters,
-    getExisitingParameters,
-    existingParameters,
-    setExistingParameters,
+    setExistingStationData,
     resetEquipmentSheet,
 
     equipmentTypeSelection,
     equipmentSelection,
-    auxiliaryInformation,
+    parameters,
     channels,
     ipAddresses,
     navigation,
@@ -379,6 +401,7 @@ function App() {
     updatePsipInformation,
     setIpAddressesCount,
     ipAddressesCount,
+    handleLoadExistingParameters,
   };
 
   return (

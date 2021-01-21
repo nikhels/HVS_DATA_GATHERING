@@ -8,7 +8,7 @@ import { FaCheck} from 'react-icons/fa'
 export default function HeaderIpAddresses() {
   const {    
 
-    auxiliaryInformation,
+    parameters,
     loadOrCreateIpAddresses,
     // equipmentSelection,
     handlePsipSourceSelection,
@@ -20,7 +20,7 @@ export default function HeaderIpAddresses() {
     label:"PSIP Source",
     className:"input__dropdown large",
     functionCall: handlePsipSourceSelection,
-    displayValue:auxiliaryInformation.psipInformation.psip,
+    displayValue:parameters.psipInformation.psip,
     selection1: "Internal Spooling",
     selection2: "Downstream",
   }
@@ -54,10 +54,10 @@ export default function HeaderIpAddresses() {
               type="text"
               className="input__text-box small"
               placeholder= "8.8.8.8"
-              defaultValue= {auxiliaryInformation.dns1}
+              defaultValue= {parameters.dns1}
               size="small"
               color="secondary"
-              onBlur = {(e) => auxiliaryInformationDispatch({type:ACTIONS.CHANGE, payload:{dns1:e.target.value}})} 
+              onBlur = {(e) => parametersDispatch({type:ACTIONS.CHANGE, payload:{dns1:e.target.value}})} 
               /> 
           </div>
           <div> 
@@ -67,10 +67,10 @@ export default function HeaderIpAddresses() {
               type="text"
               className="input__text-box small"
               placeholder= "8.8.4.4"
-              defaultValue= {auxiliaryInformation.dns2}
+              defaultValue= {parameters.dns2}
               size="small"
               color="secondary"
-              onBlur = {(e) => auxiliaryInformationDispatch({type:ACTIONS.CHANGE, payload:{dns2:e.target.value}})} 
+              onBlur = {(e) => parametersDispatch({type:ACTIONS.CHANGE, payload:{dns2:e.target.value}})} 
               /> 
           </div>
           <div> 
@@ -80,10 +80,10 @@ export default function HeaderIpAddresses() {
               type="text"
               className="input__text-box small"
               placeholder= "129.6.15.28"
-              defaultValue= {auxiliaryInformation.ntp}
+              defaultValue= {parameters.ntp}
               size="small"
               color="secondary"
-              onBlur = {(e) => auxiliaryInformationDispatch({type:ACTIONS.CHANGE, payload:{ntp:e.target.value}})} 
+              onBlur = {(e) => parametersDispatch({type:ACTIONS.CHANGE, payload:{ntp:e.target.value}})} 
               /> 
             </div> */}
 

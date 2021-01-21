@@ -4,54 +4,54 @@ import { RowBuilder } from "../DEFAULTS/RowBuilder";
 import { HeaderBuilder } from "../DEFAULTS/HeaderBuilder";
 import { PsipATSC1Header, PsipATSC1 } from "../PSIP/PsipATSC1";
 import { CloseIcon } from "../DEFAULTS/ButtonIcons";
-import { UpdateAuxiliary } from "../DEFAULTS/UpdateAuxiliary";
+import { UpdateReducer } from "../DEFAULTS/UpdateReducer";
 
 export default function DisplayPsip() {
-  const { auxiliaryInformationDispatch, auxiliaryInformation } = useContext(
+  const { parametersDispatch, parameters } = useContext(
     GlobalContext
   );
 
   const {
     psipInformation: { info, PSIP1, PSIP2 },
-  } = auxiliaryInformation;
+  } = parameters;
 
   const updatePSIPData = {
     location: info,
     payload: "info",
-    id: "psip",
+    id: "psipInformation",
   };
   const updatePSIP1Data = {
     location: PSIP1,
     payload: "PSIP1",
-    id: "psip",
+    id: "psipInformation",
   };
   const updatePSIP2Data = {
     location: PSIP2,
     payload: "PSIP2",
-    id: "psip",
+    id: "psipInformation",
   };
 
   function psipAddRemove(toggle) {
     switch (toggle) {
       case "add":
         if (info.count < 2) {
-          UpdateAuxiliary(
+          UpdateReducer(
             { count: info.count + 1 },
             updatePSIPData,
-            auxiliaryInformationDispatch
+            parametersDispatch
           );
-          UpdateAuxiliary(
+          UpdateReducer(
             { selected: true },
             updatePSIP2Data,
-            auxiliaryInformationDispatch
+            parametersDispatch
           );
         }
         break;
       case "remove":
-        UpdateAuxiliary(
+        UpdateReducer(
           { count: info.count - 1 },
           updatePSIPData,
-          auxiliaryInformationDispatch
+          parametersDispatch
         );
         break;
       default:
@@ -67,7 +67,7 @@ export default function DisplayPsip() {
             <thead>
               <tr>
                 <HeaderBuilder
-                  setCount={psipAddRemove}
+                  functionData={{addOrRemove:psipAddRemove}}
                   headerData={PsipATSC1Header}
                 />
               </tr>
@@ -78,8 +78,8 @@ export default function DisplayPsip() {
                 selected={PSIP1.selected}
                 selectionKey={"selected"}
                 updateData={updatePSIP1Data}
-                changeFunction={auxiliaryInformationDispatch}
-                updateFunction={UpdateAuxiliary}
+                changeFunction={parametersDispatch}
+                updateFunction={UpdateReducer}
               />
               {info.count > 1 && (
                 <RowBuilder
@@ -87,8 +87,8 @@ export default function DisplayPsip() {
                   selected={PSIP2.selected}
                   selectionKey={"selected"}
                   updateData={updatePSIP2Data}
-                  changeFunction={auxiliaryInformationDispatch}
-                  updateFunction={UpdateAuxiliary}
+                  changeFunction={parametersDispatch}
+                  updateFunction={UpdateReducer}
                 />
               )}
             </tbody>

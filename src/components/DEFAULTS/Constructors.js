@@ -47,5 +47,6 @@ export function IpAddressConstructor(x, ipAddressesCount, psip) {
     }
   }
   this.ip = "192.168.1.1" + x;
+  this.selected = false
 }
 
